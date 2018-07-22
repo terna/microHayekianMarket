@@ -3,7 +3,7 @@ A few tiny examples about a market built on independent agents, considering the 
 
 A suggested reading about Hayek is a quite recent paper of [Bowles et al. (2017)](https://www.aeaweb.org/articles?id=10.1257/jep.31.3.215).
 
-The explanations of this construction are reported in the [microHayekianMarket.pdf]()
+The explanations of this construction are reported in the [microHayekianMarket.pdf](https://github.com/terna/microHayekianMarket/blob/master/microHayekianMarket.pdf) file.
 
 The file *microHayekianMarket.ipynb* contains the examples.
 
