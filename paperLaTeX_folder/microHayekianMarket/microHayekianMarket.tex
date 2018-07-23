@@ -158,7 +158,7 @@ With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and sorting in decreasing order the vector
 
 This is the \emph{warming up}, or starting situation, of the model. To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase.
 
-The IPython (or Python 3.x) code is;
+The IPython (or Python 3.x) code is:
 
 \begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
 # warming up
@@ -225,6 +225,89 @@ A comment: we have a plausible series of mean price, with a complicated behavior
 
 The right side of the buyer and seller curves shows another plausible situation with agents not exchanging. 
 
+The IPython (or Python 3.x) code is:
+
+\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+# hayekian perspective
+meanPrice_ts=[]
+meanPriceStDev_ts=[]
+meanPriceVar_ts=[]
+
+for t in range(1,nCycles+1):    
+    dealPrices=[]
+    agNum=max(nBuyers,nSellers)
+    for n in range(agNum):
+        i = np.random.randint(0,nBuyers)
+        j = np.random.randint(0,nSellers)
+        #print ('%2d %2d %.3f %.3f %.3f'% \
+        #      (i,j,buyerPriceList[i]-sellerPriceList[j],\
+        #       buyerPriceList[i],sellerPriceList[j]))
+        
+        if buyerPriceList[i]>=sellerPriceList[j]:
+            dealPrices.append(sellerPriceList[j])
+            buyerPriceList[i] *=1/(1+np.random.uniform(d1))
+            sellerPriceList[j]*=1+np.random.uniform(d2)
+        else:
+            buyerPriceList[i] *=1+np.random.uniform(d1)
+            sellerPriceList[j]*=1/(1+np.random.uniform(d2))
+
+        #print ('%2d %2d %.3f %.3f %.3f \n'% \
+        #      (i,j,buyerPriceList[i]-sellerPriceList[j],\
+        #       buyerPriceList[i],sellerPriceList[j]))
+           
+    if len(dealPrices) > 2:
+        meanPrice_ts.append(s.mean(dealPrices))
+        meanPriceVar_ts.append(s.variance(dealPrices))
+        meanPriceStDev_ts.append(s.stdev(dealPrices))
+    else:
+        meanPrice_ts.append(np.nan)
+        meanPriceStDev_ts.append(np.nan)
+
+    if t % 1000==0:
+        clear_output()
+        print('time', t, 'and n. of exchanges in the last cycle', \
+              len(dealPrices))
+        print(\
+        'mean and var of exchange prices in the last cycle: %.3f, %.3f' %\
+              (meanPrice_ts[-1],meanPriceVar_ts[-1]))
+
+        plt.figure(1,figsize=(7,15),clear=True)
+
+        plt.subplot(311)
+        plt.plot(np.sort(buyerPriceList)[::-1],"r")
+        plt.plot(np.sort(sellerPriceList),"b")
+        plt.title(\
+            "buyers' prices (red) and sellers' prices (blue)")
+        xlabel("the agents")
+        ylabel("agents' reservation prices")
+
+        plt.subplot(312)
+        plt.title("mean price of each cycle")
+        xlabel("t")
+        ylabel("mean price of each cycle")
+        plt.plot(meanPrice_ts,"g")
+        
+        plt.subplot(313)
+        plt.title("price coef. of variation within each cycle")
+        coefOfVariation=[]
+        for m in range(len(meanPriceStDev_ts)):
+            coefOfVariation.append(meanPriceStDev_ts[m]/
+                                   meanPrice_ts[m])
+        plt.plot(coefOfVariation,".",markersize=0.1)
+        xlabel("t")
+        ylabel("price coef. of variation within each cycle")
+        show()
+        #time.sleep(0.1)
+
+plt.figure(2,figsize=(7,9))
+plt.subplot(211)
+plt.title("mean price histogram")
+plt.hist(meanPrice_ts,100,color="g");
+plt.subplot(212)
+plt.title("price standard deviation (within each cycle) histogram")
+plt.hist(meanPriceStDev_ts,100);
+\end{lstlisting}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The unstructured version}\label{The unstructured version}\index{unstructured version}
@@ -261,6 +344,90 @@ The \emph{coefficient of variation} is calculated as $\frac{standard~deviation}{
 \end{figure}
 
 A comment: this counter-example shows the missing the intelligent correction of the price that implicitly propagate the price among all the agents, a system of pure random price settings is absolutely far from being plausible.
+
+The IPython (or Python 3.x) code is:
+
+\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+# unstructured case (remember the warming up step)
+meanPrice_ts=[]
+meanPriceStDev_ts=[]
+meanPriceVar_ts=[]
+
+for t in range(1,nCycles+1):    
+    dealPrices=[]
+    agNum=max(nBuyers,nSellers)
+    for n in range(agNum):
+        i = np.random.randint(0,nBuyers)
+        j = np.random.randint(0,nSellers)
+        #print ('%2d %2d %.3f %.3f %.3f'% \
+        #      (i,j,buyerPriceList[i]-sellerPriceList[j],\
+        #       buyerPriceList[i],sellerPriceList[j]))
+        
+        dealPrices.append((sellerPriceList[j]+buyerPriceList[i]/0.5))
+        
+        if np.random.uniform(0,1)>=0.5:    
+            buyerPriceList[i] *=1/(1+np.random.uniform(0,d1))
+            sellerPriceList[j]*=1+np.random.uniform(0,d2)
+        else:
+            buyerPriceList[i] *=1+np.random.uniform(0,d1)
+            sellerPriceList[j]*=1/(1+np.random.uniform(0,d2))
+
+        #print ('%2d %2d %.3f %.3f %.3f \n'% \
+        #      (i,j,buyerPriceList[i]-sellerPriceList[j],\
+        #       buyerPriceList[i],sellerPriceList[j]))
+           
+    if len(dealPrices) > 2:
+        meanPrice_ts.append(s.mean(dealPrices))
+        meanPriceVar_ts.append(s.variance(dealPrices))
+        meanPriceStDev_ts.append(s.stdev(dealPrices))
+    else:
+        meanPrice_ts.append(np.nan)
+        meanPriceStDev_ts.append(np.nan)
+
+    if t % 1000==0:
+        clear_output()
+        print('time', t, 'and n. of exchanges in the last cycle', \
+              len(dealPrices))
+        print(\
+        'mean and var of exchange prices in the last cycle: %.3f, %.3f' %\
+              (meanPrice_ts[-1],meanPriceVar_ts[-1]))
+
+        plt.figure(1,figsize=(7,15),clear=True)
+
+        plt.subplot(311)
+        plt.plot(np.sort(buyerPriceList)[::-1],"r")
+        plt.plot(np.sort(sellerPriceList),"b")
+        plt.title(\
+            "buyers' prices (red) and sellers' prices (blue)")
+        xlabel("the agents")
+        ylabel("agents' reservation prices")
+
+        plt.subplot(312)
+        plt.title("mean price of each cycle")
+        xlabel("t")
+        ylabel("mean price of each cycle")
+        plt.plot(meanPrice_ts,"g")
+        
+        plt.subplot(313)
+        plt.title("price coef. of variation within each cycle")
+        coefOfVariation=[]
+        for m in range(len(meanPriceStDev_ts)):
+            coefOfVariation.append(meanPriceStDev_ts[m]/
+                                   meanPrice_ts[m])
+        plt.plot(coefOfVariation,".",markersize=0.1)
+        xlabel("t")
+        ylabel("price coef. of variation within each cycle")
+        show()
+        #time.sleep(0.1)
+
+plt.figure(2,figsize=(7,9))
+plt.subplot(211)
+plt.title("mean price histogram")
+plt.hist(meanPrice_ts,100,color="g");
+plt.subplot(212)
+plt.title("price standard deviation (within each cycle) histogram")
+plt.hist(meanPriceStDev_ts,100);
+\end{lstlisting}
 
 
 \clearpage
