@@ -8,7 +8,7 @@
 \pagestyle{fancy}
 \lhead{}
 \rhead{}
-\chead{micro Hayekian Marketl}
+\chead{micro Hayekian Market}
 
 
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
@@ -114,7 +114,7 @@ A suggested reading about Hayek is a quite recent paper of \citeauthor{10.1257/j
 
 The IPython (or Python 3.x) code requires the following starting setup:
 
-\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[language=Python, caption=Setup of the program, basicstyle=\ttfamily\footnotesize]
 %pylab inline
 import statistics as s
 import numpy as np
@@ -131,29 +131,31 @@ is a \emph{magic} command of Jupyter.\footnote{\url{http://jupyter.org}.}
 
 Our agents are simply prices, to be interpreted as reservation prices.\footnote{The $max$ price a buyer could pay and the $min$ one a seller could accept.}
 
-We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but in this case we can use them also as agents.
+We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but  we can use them also as agents.
 
-Both in the hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have a common \emph{warning up} action.
+Both in the hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run the \emph{warning up} action.
 
-In this phase we define:
+In this phase, we define:
 
 \begin{itemize}
 \item $nCycles$ - number of simulation cycles;
 \item $nBuyers$  - number of the buyers;
 \item $nSellers$ - number of the sellers;
-\item $d_0$ - the lower bound for random uniform numbers, both for the buyers and the sellers in the warming up phase; in the running phase, the lower bound is $0$;
-\item $d_1$ - the upper bound for random uniform numbers for the buyers;
-\item $d_2$ - the upper bound for random uniform numbers for the sellers;
+\item $d_0$ - the lower bound of the random uniform numbers, both for the buyers and the sellers, in the warming up phase; 
+
+in the running phase, the lower bound is $0$;
+\item $d_1$ - the upper bound of the random uniform numbers for the buyers;
+\item $d_2$ - the upper bound of the random uniform numbers for the sellers;
 \item the initial buyer $i$ reservation price, different for each buyer: $p_{b,i}=\frac{1} {1 + u_i}$ with $u_i\sim\mathcal{U}(d_0,d_1)$;
-\item initial seller $j$ reservation price, different for each seller: $p_{s,j}=1 + u_j$ with $u_j\sim\mathcal{U}(d_0,d_2)$.
+\item the initial seller $j$ reservation price, different for each seller: $p_{s,j}=1 + u_j$ with $u_j\sim\mathcal{U}(d_0,d_2)$.
 \end{itemize}
 
-With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand and an offer curves (Fig. \ref{output_2_1.png}).
+With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand curve and an offer one (Fig. \ref{output_2_1.png}).
 
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_1.png}}
-\caption{An example of initial not overlapping demand and offer curves}
+\caption{An example of initial not overlapping demand curve and offer curve}
 \label{output_2_1.png}
 \end{center}
 \end{figure}
@@ -193,14 +195,14 @@ ylabel("agents' reservation prices")
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The hayekian version}\label{The hayekian version}\index{hayekian version}
  
-The buyers and the sellers meet randomly. Buyer $i$ and seller $j$ exchange if  $pL^b_i \geq pL^s_j$; the deal is recorded at the price of the seller $pL^s_j$.\footnote{In the $mall$ sell price are public.}
+The buyers and the sellers meet randomly. Buyer $i$ and seller $j$ exchange if  $pL^b_i \geq pL^s_j$; the deal is recorded at the price of the seller $pL^s_j$.\footnote{In the $mall$, sell prices are public.}
 
-In this version, which is the important one in this note, the running prices are changing following the correction coefficients:
+In this version, representing the key point in this note, the running prices are changing being multiplied in each cycle by following the correction coefficients:
 
 \begin{itemize}
 \item for the buyer: (i) $c_b=\frac{1} {1 + u_b}$ if the deal succeeds (trying the pay less next time) or (ii) $c_b=1 + u_b$ if the deal fails (preparing to pay more next time); in (i) and (ii) we have $u_b\sim\mathcal{U}(0,d_1)$
 
-\item for the seller: (iii) $c_s=\frac{1} {1 + u_s}$ if the deal succeeds (preparing to obtain a higher revenue next time) or (iv) $c_s=1 + u_s$ if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
+\item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (preparing to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
 With $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean in each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_1.png} and \ref{output_3_2.png}).
@@ -213,23 +215,30 @@ With $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of m
 \end{center}
 \end{figure}
 
-The \emph{coefficient of variation} is calculated as $\frac{standard~deviation}{mean}$.
+The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standard~deviation_t}{mean_t}$$.
 
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2.png}}
-\caption{Hayekian case: (i) distribution of mean prices in each cycle and (ii) of their standard deviations}
+\caption{Hayekian case: (i) the distribution of mean prices in each cycle and (ii) that of their standard deviations within each cycle}
 \label{output_3_2.png}
 \end{center}
 \end{figure}
 
-A comment: we have a plausible series of mean price, with a complicated behavior, and with a high stability of the dispersion of the values within each cycle.
+\begin{center}
+\fbox{\parbox[c][3.5cm][c]{13cm}{
+A comment: we have a plausible series of mean prices, with a complicated behavior, and with a high stability of the dispersion of the values within each cycle.
 
-The right side of the buyer and seller curves shows another plausible situation with agents not exchanging. 
+The right side of the buyer and seller curves shows another plausible situation: that of the presence of agents not exchanging. {\color{red}A note for Matteo and Pietro: this is a very important effect for the \emph{Oligopoly} model.}}}
+\end{center}
+
+\bigskip
+
+Have a look to the Appendix \ref{Two cases of not balancing numbers of buyers and sellers} for the cases of not balancing number of buyers and sellers.
 
 The IPython (or Python 3.x) code is:
 
-\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[language=Python, caption=The model in the hayekian perspective, basicstyle=\ttfamily\footnotesize]
 # hayekian perspective
 meanPrice_ts=[]
 meanPriceStDev_ts=[]
@@ -314,18 +323,18 @@ plt.hist(meanPriceStDev_ts,100);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The unstructured version}\label{The unstructured version}\index{unstructured version}
 
-The buyers and the sellers meet randomly as in Section \ref{The hayekian version}. Buyer $i$ and seller $j$ exchange in any case; the deal is recorded at the mean of the price of the seller $pL^s_j$ and of the price of the buyer.
+The buyers and the sellers meet randomly as in Section \ref{The hayekian version}. Buyer $i$ and seller $j$ exchange in any case; the deal is recorded at the mean of the price of the seller $pL^s_j$ and of the price $pL^b_i$ of the buyer.
 
-In this version the running prices are changing following the correction coefficients:
+In this version the running prices are changing being multiplied in each cycle by following the correction coefficients:
 
 \begin{itemize}
 
-\item with equal probability for the buyer: (i) $c_b=\frac{1} {1 + u_b}$ or (ii) $c_b=1 + u_b$); in (i) and (ii) we have $u_b\sim\mathcal{U}(0,d_1)$
+\item with the same probability for the buyer: (i) $c_b=\frac{1} {1 + u_b}$ or (ii) $c_b=1 + u_b$); in (i) and (ii) we have $u_b\sim\mathcal{U}(0,d_1)$
 
-\item  with equal probability for the seller: (iii) $c_s=\frac{1} {1 + u_s}$ or (iv) $c_s=1 + u_s$; in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
+\item  with the same probability for the seller: (iii) $c_s=1 + u_s$ or (iv) $c_s=\frac{1} {1 + u_s}$; in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of mean prices (mean in each cycle), and explodinf variance within each cycle (see Fig. \ref{output_4_1.png} and \ref{output_4_2.png}).
+With $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of mean prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_1.png} and \ref{output_4_2.png}).
 
 \begin{figure}[htbp]
 \begin{center}
@@ -335,21 +344,26 @@ With $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequ
 \end{center}
 \end{figure}
 
-The \emph{coefficient of variation} is calculated as $\frac{standard~deviation}{mean}$.
+The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standard~deviation_t}{mean_t}$$.
 
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_2.png}}
-\caption{Unstructured case: (i) distribution of mean prices in each cycle and (ii) of their standard deviations}
+\caption{Unstructured case: (i) the distribution of mean prices in each cycle and (ii) that of their standard deviations within each cycle}
 \label{output_4_2.png}
 \end{center}
 \end{figure}
 
-A comment: this counter-example shows the missing the intelligent correction of the price that implicitly propagate the price among all the agents, a system of pure random price settings is absolutely far from being plausible.
+\begin{center}
+\fbox{\parbox[c][2.6cm][c]{13cm}{
+A comment: this counter-example shows that, missing the \emph{intelligence} in the correction of the prices (implicitly propagating among all the agents), a system of pure random price settings is absolutely far from being plausible.}}
+\end{center}
+
+\bigskip
 
 The IPython (or Python 3.x) code is:
 
-\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[language=Python, caption=The unstructured version, basicstyle=\ttfamily\footnotesize]
 # unstructured case (remember the warming up step)
 meanPrice_ts=[]
 meanPriceStDev_ts=[]
@@ -431,6 +445,16 @@ plt.title("price standard deviation (within each cycle) histogram")
 plt.hist(meanPriceStDev_ts,100);
 \end{lstlisting}
 
+
+
+
+\begin{appendices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Two cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two cases of not balancing numbers of buyers and sellers}
+\thispagestyle{fancy}
+
+\end{appendices}
 
 \clearpage
 \addcontentsline{toc}{chapter}{Bibliography}
