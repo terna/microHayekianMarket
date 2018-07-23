@@ -59,6 +59,7 @@
 \newcommand{\ts}{\textsuperscript} %to write briefly th etc. as a superscript
 
 \usepackage{color}
+\usepackage{listings}
 
 
 \makeindex
@@ -107,6 +108,23 @@ A suggested reading about Hayek is a quite recent paper of \citeauthor{10.1257/j
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The technical setup of the code}\label{The technical setup of the code}\index{technical setup}
+
+The The IPython\footnote{\url{https://ipython.org}.} (or Python\footnote{\url{https://www.python.org}.} 3.x) code requires the following starting setup:
+
+\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+%pylab inline
+import statistics as s
+import numpy as np
+import pylab as plt
+from IPython.display import clear_output
+import time
+\end{lstlisting}
+
+\verb|%pylab inline| 
+is a \emph{magic} command of Jupyter.\footnote{\url{http://jupyter.org}.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The structure of the model and the \emph{warming up} phase}\label{The structure of the model}\index{structure}
 
 Our agents are simply prices, to be interpreted as reservation prices:\footnote{The $max$ price a buyer could pay and the $min$ one a seller could accept.}
@@ -139,6 +157,36 @@ With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and sorting in decreasing order the vector
 \end{figure}
 
 This is the \emph{warming up}, or starting situation, of the model. To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase.
+
+The IPython (or Python 3.x) code is;
+
+\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+# warming up
+
+# run it before executing both - the hayekian perspective or
+#                              - the unstructured case
+
+d0=0.1
+d1=0.2
+d2=0.2
+
+nCycles=10000
+nBuyers= 100
+nSellers=100
+
+buyerPriceList=[]
+sellerPriceList=[]
+
+for i in range(nBuyers):
+    buyerPriceList.append(1/(1+np.random.uniform(d0,d1)))
+for j in range(nSellers):
+    sellerPriceList.append(1+np.random.uniform(d0,d2))
+    
+plt.plot(np.sort(buyerPriceList)[::-1],"r");
+plt.plot(np.sort(sellerPriceList),"b");
+xlabel("the agents")
+ylabel("agents' reservation prices")
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The hayekian version}\label{The hayekian version}\index{hayekian version}
