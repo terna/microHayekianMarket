@@ -100,17 +100,19 @@
 \addcontentsline{toc}{chapter}{\protect\numberline{}Introduction to a micro Hayekian Market}%
 
 
-The purpose of this note is that of showing a very simple agent-based model of a market, with emergent interesting  price dynamics. A counter example is also introduced, showing implausible price dynamics.
+The purpose of the note is that of introducing a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
 
-The code uses the IPython language (interactive Python) and can be dowloaded from \url{https://github.com/terna/microHayekianMarket} using the \emph{Clone or download} button; it is also possible to run it directly on line at \url{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}.
+ A counter example is also introduced, showing how with tiny modification we generate implausible price dynamics.
+
+The code uses the IPython\footnote{\url{https://ipython.org}.} language (interaction with Python\footnote{\url{https://www.python.org}.}) and can be dowloaded from \url{https://github.com/terna/microHayekianMarket} using the \emph{Clone or download} button; it is also possible to run it directly on line at \\\url{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}.
 
 A suggested reading about Hayek is a quite recent paper of \citeauthor{10.1257/jep.31.3.215} (\citeyear{10.1257/jep.31.3.215}).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The technical setup of the code}\label{The technical setup of the code}\index{technical setup}
+\section{The technical setup}\label{The technical setup}\index{technical setup}
 
-The The IPython\footnote{\url{https://ipython.org}.} (or Python\footnote{\url{https://www.python.org}.} 3.x) code requires the following starting setup:
+The IPython (or Python 3.x) code requires the following starting setup:
 
 \begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
 %pylab inline
@@ -127,7 +129,7 @@ is a \emph{magic} command of Jupyter.\footnote{\url{http://jupyter.org}.}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The structure of the model and the \emph{warming up} phase}\label{The structure of the model}\index{structure}
 
-Our agents are simply prices, to be interpreted as reservation prices:\footnote{The $max$ price a buyer could pay and the $min$ one a seller could accept.}
+Our agents are simply prices, to be interpreted as reservation prices.\footnote{The $max$ price a buyer could pay and the $min$ one a seller could accept.}
 
 We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but in this case we can use them also as agents.
 
