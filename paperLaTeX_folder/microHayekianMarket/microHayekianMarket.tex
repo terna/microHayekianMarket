@@ -454,7 +454,68 @@ plt.hist(meanPriceStDev_ts,100);
 \section{Two cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two cases of not balancing numbers of buyers and sellers}
 \thispagestyle{fancy}
 
-If $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case $nBuyers \gg nSellers$}
+If $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_2_1a.png}), we observe in that Figs. \ref{output_3_1a.png} and \ref{output_3_2a.png} the prices are higher than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png}.
+
+The result is highly consistent with the numbers of the agents in the two sides of the market.
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_1a.png}}
+\caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \gg nSellers$}
+\label{output_2_1a.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1a.png}}
+\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices, (iii) their coeffcients of variation within each cycle}
+\label{output_3_1a.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2a.png}}
+\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices in each cycle and (ii) that of their standard deviations within each cycle}
+\label{output_3_2a.png}
+\end{center}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case $nBuyers \ll nSellers$}
+If $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_2_1b.png}), we observe in that Figs. \ref{output_3_1b.png} and \ref{output_3_2b.png} the prices are lower than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png}.
+
+The result is highly consistent with the numbers of the agents in the two sides of the market.
+
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_1b.png}}
+\caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \ll nSellers$}
+\label{output_2_1b.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1b.png}}
+\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices, (iii) their coeffcients of variation within each cycle}
+\label{output_3_1b.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2b.png}}
+\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) the distribution of mean prices in each cycle and (ii) that of their standard deviations within each cycle}
+\label{output_3_2b.png}
+\end{center}
+\end{figure}
+
+
 
 \end{appendices}
 
