@@ -138,25 +138,26 @@ Both in the hayekian perspective (Section \ref{The hayekian version}) and in the
 In this phase, we define:
 
 \begin{itemize}
-\item $nCycles$ - number of simulation cycles;
-\item $nBuyers$  - number of the buyers;
-\item $nSellers$ - number of the sellers;
 \item $d_0$ - the lower bound of the random uniform numbers, both for the buyers and the sellers, in the warming up phase; 
 
 in the running phase, the lower bound is $0$;
 \item $d_1$ - the upper bound of the random uniform numbers for the buyers;
 \item $d_2$ - the upper bound of the random uniform numbers for the sellers;
+\item $nCycles$ - number of simulation cycles;
+\item $nBuyers$  - number of the buyers;
+\item $nSellers$ - number of the sellers;
+\item $seed$ - the seed of the random numbers;
 \item the initial buyer $i$ reservation price, different for each buyer: $p_{b,i}=\frac{1} {1 + u_i}$ with $u_i\sim\mathcal{U}(d_0,d_1)$;
 \item the initial seller $j$ reservation price, different for each seller: $p_{s,j}=1 + u_j$ with $u_j\sim\mathcal{U}(d_0,d_2)$.
 \end{itemize}
 
-With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand curve and an offer one (Fig. \ref{output_2_1.png}).
+With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand curve and an offer one (Fig. \ref{output_2_0.png}).
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_1.png}}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_0.png}}
 \caption{An example of initial not overlapping demand curve and offer curve}
-\label{output_2_1.png}
+\label{output_2_0.png}
 \end{center}
 \end{figure}
 
