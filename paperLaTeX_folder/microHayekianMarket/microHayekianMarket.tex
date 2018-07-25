@@ -211,7 +211,7 @@ In this version, representing the key point in this note, the running prices are
 \item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (preparing to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean in each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_1.png} and \ref{output_3_2.png}).
+With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_1.png} and \ref{output_3_2.png}).
 
 \begin{figure}[htbp]
 \begin{center}
@@ -226,7 +226,7 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2.png}}
-\caption{Hayekian case: (i) the distribution of mean prices in each cycle and (ii) that of their standard deviations within each cycle}
+\caption{Hayekian case: (i) the distribution of mean prices of each cycle and (ii) that of their standard deviations within each cycle}
 \label{output_3_2.png}
 \end{center}
 \end{figure}
@@ -361,7 +361,7 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_2.png}}
-\caption{Unstructured case: (i) the distribution of mean prices in each cycle and (ii) that of their standard deviations within each cycle}
+\caption{Unstructured case: (i) the distribution of mean prices of each cycle and (ii) that of their standard deviations within each cycle}
 \label{output_4_2.png}
 \end{center}
 \end{figure}
