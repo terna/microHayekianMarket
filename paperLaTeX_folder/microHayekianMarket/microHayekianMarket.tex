@@ -206,7 +206,7 @@ The buyers and the sellers meet randomly. Buyer $i$ and seller $j$ exchange if  
 In this version, representing the key point in this note, the running prices are changing being multiplied in each cycle by following the correction coefficients:
 
 \begin{itemize}
-\item for the buyer: (i) $c_b=\frac{1} {1 + u_b}$ if the deal succeeds (trying the pay less next time) or (ii) $c_b=1 + u_b$ if the deal fails (preparing to pay more next time); in (i) and (ii) we have $u_b\sim\mathcal{U}(0,d_1)$
+\item for the buyer: (i) $c_b=\frac{1} {1 + u_b}$ if the deal succeeds (trying to pay less next time) or (ii) $c_b=1 + u_b$ if the deal fails (preparing to pay more next time); in (i) and (ii) we have $u_b\sim\mathcal{U}(0,d_1)$
 
 \item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (preparing to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
@@ -473,7 +473,7 @@ if meanPriceStDev_ts_hist != []:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \gg nSellers$}
-If $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=30$, as in Fig. \ref{output_2_0a.png}), we observe in that Figs. \ref{output_3_1a.png} and \ref{output_3_2a.png} the prices are higher than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png}. We have alway $seed=100$.
+If $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=30$, as in Fig. \ref{output_2_0a.png}), we observe in that Figs. \ref{output_3_1a.png} and \ref{output_3_2a.png} the prices are higher than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png}. We have always $seed=100$.
 
 The result is highly consistent with the numbers of the agents in the two sides of the market.
 
