@@ -473,9 +473,18 @@ if meanPriceStDev_ts_hist != []:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \gg nSellers$}
-If $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=30$, as in Fig. \ref{output_2_0a.png}), we observe that in Figs. \ref{output_3_1a.png} and \ref{output_3_2a.png} the prices are higher than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png}. We have always $seed=100$.
+With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_2_0a.png}), we have two possible path of analysis. 
 
-The result is highly consistent with the numbers of the agents in the two sides of the market.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Case $nBuyers \gg nSellers$, with different rates of per-capita correction}\label{nBuyers > nSellers with different rates of per-capita correction}\index{nBuyers > nSellers with different rates of per-capita correction}
+
+If $nBuyers \gg nSellers$, having in each cycle one call to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
+
+As a consequence, the probability that a \emph{seller} decreases her price to meet a \emph{b}uyer is greater than the probability that a \emph{buyer} increases her price to meet a \emph{seller}. 
+
+We can observe that in Figs. \ref{output_3_1a.png} and \ref{output_3_2a.png} the prices are---in the end---lower than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png} and, must of all, the price tendence has a strong negative slope. We have always $seed=111$.
+
+This result is inconsistent with the microeconomic theory, where an excess of demand is supposed to increase the prices.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -502,10 +511,24 @@ The result is highly consistent with the numbers of the agents in the two sides 
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Case $nBuyers \ll nSellers$}
-If $nBuyers \ll nSellers$ (e.g., $nBuyers=30$ and $nSellers=100$, as in Fig. \ref{output_2_0b.png}), we observe that in Figs. \ref{output_3_1b.png} and \ref{output_3_2b.png} the prices are lower than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png}. We have always $seed=100$.
+\subsubsection{Case $nBuyers \gg nSellers$, with equal rates of per-capita correction}\label{nBuyers > nSellers with equal rates of per-capita correction}\index{nBuyers > nSellers with equal rates of per-capita correction}
 
-The result is highly consistent with the numbers of the agents in the two sides of the market.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case $nBuyers \ll nSellers$}
+With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_2_0b.png}), we have two possible path of analysis. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Case $nBuyers \ll nSellers$, with different rates of per-capita correction}\label{nBuyers < nSellers with different rates of per-capita correction}\index{nBuyers < nSellers with different rates of per-capita correction}
+
+If $nBuyers \ll nSellers$, having in each cycle one call to a  \emph{buyer} from each  \emph{seller}, the number of per-capita actions of the \emph{buyers} in each cycle is greater of the number of per-capita actions of the \emph{sellers}.
+
+As a consequence, the probability that a \emph{buyer} increases her price to meet a \emph{seller} is greater than the probability that a \emph{seller} decreases her price to meet a \emph{buyer}. 
+
+We can observe that in Figs. \ref{output_3_1b.png} and \ref{output_3_2b.png} the prices are---in the end---greater than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png} and, must of all, the price tendence has a strong positive slope. We have always $seed=111$.
+
+This result is inconsistent with the microeconomic theory, where an excess of offer is supposed to decrease the prices.
 
 
 \begin{figure}[htbp]
@@ -532,6 +555,10 @@ The result is highly consistent with the numbers of the agents in the two sides 
 \end{center}
 \end{figure}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Case $nBuyers \ll nSellers$, with equal rates of per-capita correction}\label{nBuyers < nSellers with equal rates of per-capita correction}\index{nBuyers < nSellers with equal rates of per-capita correction}
 
 
 \end{appendices}
