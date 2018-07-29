@@ -11,7 +11,7 @@
 \chead{micro Hayekian Market}
 
 
-\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\usepackage{geometry}            % See geometry.pdf to learn the layout options. There are lots.
 \geometry{a4paper}                   % ... or a4paper or a5paper or ... letterpaper
 %\geometry{landscape}                % Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
@@ -116,13 +116,15 @@ The IPython (or Python 3.x) code requires the following starting setup:
 
 \begin{lstlisting}[language=Python, caption=Setup of the program, basicstyle=\ttfamily\footnotesize]
 %pylab inline
+%pylab inline
 import statistics as s
 import numpy as np
 import pylab as plt
+from ipywidgets import Output
 from IPython.display import clear_output
+from IPython.display import display
 import time
-import math
-\end{lstlisting}
+import math\end{lstlisting}
 
 \verb|%pylab inline| 
 is a \emph{magic} command of Jupyter.\footnote{\url{http://jupyter.org}.}
@@ -149,16 +151,19 @@ in the running phase, the lower bound is $0$;
 \item $nSellers$ - number of the sellers;
 \item $seed$ - the seed of the random numbers;
 \item the initial buyer $i$ reservation price, different for each buyer: $p_{b,i}=\frac{1} {1 + u_i}$ with $u_i\sim\mathcal{U}(d_0,d_1)$;
-\item the initial seller $j$ reservation price, different for each seller: $p_{s,j}=1 + u_j$ with $u_j\sim\mathcal{U}(d_0,d_2)$.
+\item the initial seller $j$ reservation price, different for each seller: $p_{s,j}=1 + u_j$ with $u_j\sim\mathcal{U}(d_0,d_2)$;
+\item $buyersSellersRatio$ - the ratio $\frac{nBuyers}{nSellers}$;
+\item $sellersBuyersRatio$ - the ratio $\frac{nSellers}{nBuyers}$;
+\item $usingRatios$ - a logic variable.
 \end{itemize}
 
-With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand curve and an offer one (Fig. \ref{output_2_0.png}).
+With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand curve and an offer one (Fig. \ref{output_3_1.png}).
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_0.png}}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1.png}}
 \caption{An example of initial not overlapping demand curve and offer curve}
-\label{output_2_0.png}
+\label{output_3_1.png}
 \end{center}
 \end{figure}
 
@@ -169,33 +174,42 @@ The IPython (or Python 3.x) code is:
 \begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
 # warming up
 
-# run it before executing both - the hayekian perspective or
-#                              - the unstructured case
+# executed before both: 
+#                     - the hayekian perspective or
+#                     - the unstructured case
+def warmingUp():
+    global nCycles, nBuyers, nSellers, buyersSellersRatio,\
+    usingBuyersSellersRatio, d0, d1, d2, buyerPriceList, sellerPriceList
 
-nCycles=10000
-nBuyers= 100
-nSellers=100
+    nCycles=10000
+    nBuyers= 100
+    nSellers=100
 
-seed=111
-np.random.seed(seed)
+    buyersSellersRatio=nBuyers/nSellers
+    sellersBuyersRatio=nSellers/nBuyers
+    usingRatios=False
 
-d0=0.1
-d1=0.2
-d2=0.2
+    seed=111
+    np.random.seed(seed)
+
+    d0=0.1
+    d1=0.2
+    d2=0.2
 
 
-buyerPriceList=[]
-sellerPriceList=[]
+    buyerPriceList=[]
+    sellerPriceList=[]
 
-for i in range(nBuyers):
-    buyerPriceList.append(1/(1+np.random.uniform(d0,d1)))
-for j in range(nSellers):
-    sellerPriceList.append(1+np.random.uniform(d0,d2))
+    for i in range(nBuyers):
+        buyerPriceList.append(1/(1+np.random.uniform(d0,d1)))
+    for j in range(nSellers):
+        sellerPriceList.append(1+np.random.uniform(d0,d2))
     
-plt.plot(sorted(buyerPriceList,reverse=True),"r");
-plt.plot(sorted(sellerPriceList),"b");
-xlabel("the agents");
-ylabel("agents' reservation prices");
+    plt.figure(0)
+    plt.plot(sorted(buyerPriceList,reverse=True),"r");
+    plt.plot(sorted(sellerPriceList),"b");
+    xlabel("the agents");
+    ylabel("agents' reservation prices");
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -211,13 +225,13 @@ In this version, representing the key point in this note, the running prices are
 \item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (preparing to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_1.png} and \ref{output_3_2.png}).
+With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_2.png} and \ref{output_3_3.png}).
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1.png}}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2.png}}
 \caption{Hayekian case: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coeffcients of variation within each tick (cycle)}
-\label{output_3_1.png}
+\label{output_3_2.png}
 \end{center}
 \end{figure}
 
@@ -225,9 +239,9 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2.png}}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_3.png}}
 \caption{Hayekian case: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
-\label{output_3_2.png}
+\label{output_3_3.png}
 \end{center}
 \end{figure}
 
@@ -246,6 +260,12 @@ The IPython (or Python 3.x) code is:
 
 \begin{lstlisting}[language=Python, caption=The model in the hayekian perspective, basicstyle=\ttfamily\footnotesize]
 # hayekian perspective
+
+warmingUp()
+
+out = Output()
+display(out)
+
 meanPrice_ts=[]
 meanPriceStDev_ts=[]
 meanPriceVar_ts=[]
@@ -261,11 +281,11 @@ for t in range(1,nCycles+1):
         
         if buyerPriceList[i]>=sellerPriceList[j]:
             dealPrices.append(sellerPriceList[j])
-            buyerPriceList[i] *=1/(1+np.random.uniform(d1))
-            sellerPriceList[j]*=1+np.random.uniform(d2)
+            buyerPriceList[i] *=1/(1+np.random.uniform(0,d1))
+            sellerPriceList[j]*=1+np.random.uniform(0,d2)
         else:
-            buyerPriceList[i] *=1+np.random.uniform(d1)
-            sellerPriceList[j]*=1/(1+np.random.uniform(d2))
+            buyerPriceList[i] *=1+np.random.uniform(0,d1)
+            sellerPriceList[j]*=1/(1+np.random.uniform(0,d2))
            
     if len(dealPrices) > 2:
         meanPrice_ts.append(s.mean(dealPrices))
@@ -276,11 +296,13 @@ for t in range(1,nCycles+1):
         meanPriceStDev_ts.append(np.nan)
 
     if t % 1000==0:
-        clear_output()
-        print('time', t, 'and n. of exchanges in the last cycle', \
+        with out:
+            clear_output()
+        with out:
+            print('time', t, 'and n. of exchanges in the last cycle', \
               len(dealPrices))
-        print(\
-        'mean and var of exchange prices in the last cycle: %.3f, %.3f' %\
+            print(\
+        'mean and var of exchange prices in the last cycle: %1.3e, %1.3e' %\
               (meanPrice_ts[-1],meanPriceVar_ts[-1]))
 
         plt.figure(1,figsize=(7,15),clear=True)
@@ -308,7 +330,6 @@ for t in range(1,nCycles+1):
         plt.plot(coefOfVariation,".",markersize=0.1)
         xlabel("t")
         ylabel("price coef. of variation within each cycle")
-        show()
         #time.sleep(0.1)
 
 # hist crashes with NaN
@@ -346,13 +367,13 @@ In this version the running prices are changing being multiplied in each cycle b
 \item  with the same probability for the seller: (iii) $c_s=1 + u_s$ or (iv) $c_s=\frac{1} {1 + u_s}$; in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of mean prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_1.png} and \ref{output_4_2.png}).
+With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of mean prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_2.png} and \ref{output_4_3.png}).
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_1.png}}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_2.png}}
 \caption{Unstructured case: ((i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coeffcients of variation within each tick (cycle)}
-\label{output_4_1.png}
+\label{output_4_2.png}
 \end{center}
 \end{figure}
 
@@ -360,9 +381,9 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_2.png}}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_3.png}}
 \caption{Unstructured case: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
-\label{output_4_2.png}
+\label{output_4_3.png}
 \end{center}
 \end{figure}
 
@@ -377,6 +398,12 @@ The IPython (or Python 3.x) code is:
 
 \begin{lstlisting}[language=Python, caption=The unstructured version, basicstyle=\ttfamily\footnotesize]
 # unstructured case (remember the warming up step)
+
+warmingUp()
+
+out = Output()
+display(out)
+
 meanPrice_ts=[]
 meanPriceStDev_ts=[]
 meanPriceVar_ts=[]
@@ -391,11 +418,11 @@ for t in range(1,nCycles+1):
         dealPrices.append((sellerPriceList[j]+buyerPriceList[i]/0.5))
 
         if np.random.uniform(0,1)>=0.5:    
-            buyerPriceList[i] *=1/(1+np.random.uniform(d1))
-            sellerPriceList[j]*=1+np.random.uniform(d2)
+            buyerPriceList[i] *=1/(1+np.random.uniform(0,d1))
+            sellerPriceList[j]*=1+np.random.uniform(0,d2)
         else:
-            buyerPriceList[i] *=1+np.random.uniform(d1)
-            sellerPriceList[j]*=1/(1+np.random.uniform(d2))
+            buyerPriceList[i] *=1+np.random.uniform(0,d1)
+            sellerPriceList[j]*=1/(1+np.random.uniform(0,d2))
         
            
     if len(dealPrices) > 2:
@@ -407,14 +434,16 @@ for t in range(1,nCycles+1):
         meanPriceStDev_ts.append(np.nan)
 
     if t % 1000==0:
-        clear_output()
-        print('time', t, 'and n. of exchanges in the last cycle', \
+        with out:
+            clear_output()
+        with out:
+            print('time', t, 'and n. of exchanges in the last cycle', \
               len(dealPrices))
-        print(\
-        'mean and var of exchange prices in the last cycle: %.3f, %.3f' %\
+            print(\
+        'mean and var of exchange prices in the last cycle: %1.3e, %1.3e' %\
               (meanPrice_ts[-1],meanPriceVar_ts[-1]))
 
-        plt.figure(1,figsize=(7,15),clear=True)
+        plt.figure(3,figsize=(7,15),clear=True)
 
         plt.subplot(311)
         plt.plot(sorted(buyerPriceList,reverse=True),"r")
@@ -439,7 +468,6 @@ for t in range(1,nCycles+1):
         plt.plot(coefOfVariation,".",markersize=0.1)
         xlabel("t")
         ylabel("price coef. of variation within each cycle")
-        show()
         #time.sleep(0.1)
 
 # hist crashes with NaN
@@ -451,7 +479,7 @@ meanPriceStDev_ts_hist=[]
 for k in range(len(meanPriceStDev_ts)): 
     if not math.isnan(meanPriceStDev_ts[k]):
         meanPriceStDev_ts_hist.append(meanPriceStDev_ts[k])
-plt.figure(2,figsize=(7,9))
+plt.figure(4,figsize=(7,9))
 plt.subplot(211)
 if meanPrice_ts_hist != []:
     plt.title("mean price histogram")
@@ -473,7 +501,7 @@ if meanPriceStDev_ts_hist != []:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \gg nSellers$}
-With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_2_0a.png}), we have two possible path of analysis. 
+With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_3_1a.png}), we have two possible path of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \gg nSellers$, with different rates of per-capita correction}\label{nBuyers > nSellers with different rates of per-capita correction}\index{nBuyers > nSellers with different rates of per-capita correction}
@@ -482,22 +510,14 @@ If $nBuyers \gg nSellers$, having in each cycle one call to a  \emph{seller} fro
 
 As a consequence, the probability that a \emph{seller} decreases her price to meet a \emph{b}uyer is greater than the probability that a \emph{buyer} increases her price to meet a \emph{seller}. 
 
-We can observe that in Figs. \ref{output_3_1a.png} and \ref{output_3_2a.png} the prices are---in the end---lower than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png} and, must of all, the price tendence has a strong negative slope. We have always $seed=111$.
+We can observe that in Figs. \ref{output_3_2a.png} and \ref{output_3_3a.png} the prices are---in the end---lower than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendence has a strong negative slope. We have always $seed=111$.
 
 This result is inconsistent with the microeconomic theory, where an excess of demand is supposed to increase the prices.
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_0a.png}}
-\caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \gg nSellers$}
-\label{output_2_0a.png}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1a.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coeffcients of variation within each tick (cycle)}
+\caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \gg nSellers$}
 \label{output_3_1a.png}
 \end{center}
 \end{figure}
@@ -505,8 +525,16 @@ This result is inconsistent with the microeconomic theory, where an excess of de
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2a.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coeffcients of variation within each tick (cycle)}
 \label{output_3_2a.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_3a.png}}
+\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\label{output_3_3a.png}
 \end{center}
 \end{figure}
 
@@ -517,7 +545,7 @@ This result is inconsistent with the microeconomic theory, where an excess of de
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \ll nSellers$}
-With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_2_0b.png}), we have two possible path of analysis. 
+With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_3_1b.png}), we have two possible path of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \ll nSellers$, with different rates of per-capita correction}\label{nBuyers < nSellers with different rates of per-capita correction}\index{nBuyers < nSellers with different rates of per-capita correction}
@@ -526,23 +554,15 @@ If $nBuyers \ll nSellers$, having in each cycle one call to a  \emph{buyer} from
 
 As a consequence, the probability that a \emph{buyer} increases her price to meet a \emph{seller} is greater than the probability that a \emph{seller} decreases her price to meet a \emph{buyer}. 
 
-We can observe that in Figs. \ref{output_3_1b.png} and \ref{output_3_2b.png} the prices are---in the end---greater than in Figs. \ref{output_3_1.png} and \ref{output_3_2.png} and, must of all, the price tendence has a strong positive slope. We have always $seed=111$.
+We can observe that in Figs. \ref{output_3_2b.png} and \ref{output_3_3b.png} the prices are---in the end---greater than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendence has a strong positive slope. We have always $seed=111$.
 
 This result is inconsistent with the microeconomic theory, where an excess of offer is supposed to decrease the prices.
 
 
 \begin{figure}[htbp]
 \begin{center}
-\fbox{\centering \includegraphics[width=0.6\textwidth]{output_2_0b.png}}
-\caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \ll nSellers$}
-\label{output_2_0b.png}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1b.png}}
-\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coeffcients of variation within each tick (cycle)}
+\caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \ll nSellers$}
 \label{output_3_1b.png}
 \end{center}
 \end{figure}
@@ -550,8 +570,16 @@ This result is inconsistent with the microeconomic theory, where an excess of of
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2b.png}}
-\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coeffcients of variation within each tick (cycle)}
 \label{output_3_2b.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_3b.png}}
+\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\label{output_3_3b.png}
 \end{center}
 \end{figure}
 
