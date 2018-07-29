@@ -136,7 +136,7 @@ Our agents are simply prices, to be interpreted as reservation prices.\footnote{
 
 We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but  we can use them also as agents.
 
-Both in the hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run the \emph{warning up} action.
+Both in the hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run the \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
 
 In this phase, we define:
 
@@ -167,7 +167,8 @@ With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $
 \end{center}
 \end{figure}
 
-This is the \emph{warming up}, or starting situation, of the model. To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase.
+This is the \emph{warming up}, or starting situation, of the model. To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase. This happens automatically, calling the specific function in the beginning of both the cases.
+
 
 The IPython (or Python 3.x) code is:
 
@@ -397,7 +398,7 @@ A comment: this counter-example shows that, missing the \emph{intelligence} in t
 The IPython (or Python 3.x) code is:
 
 \begin{lstlisting}[language=Python, caption=The unstructured version, basicstyle=\ttfamily\footnotesize]
-# unstructured case (remember the warming up step)
+# unstructured case
 
 warmingUp()
 
