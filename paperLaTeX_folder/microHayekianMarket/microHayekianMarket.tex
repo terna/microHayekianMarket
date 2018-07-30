@@ -2,6 +2,10 @@
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 
+% Insert ToC-writing after starting a titlepage
+\usepackage{etoolbox}
+\patchcmd{\abstract}{\titlepage}{\titlepage \addcontentsline{toc}{chapter}{Abstract}}{}{}
+
 % to insert a title at the beginning of each page
 % http://ctan.mirror.garr.it/mirrors/CTAN/info/italian/fancyhdr/itfancyhdr.pdf
 \usepackage{fancyhdr}
@@ -80,15 +84,38 @@
 \renewcommand{\thesection}{\arabic{section}} % to avoid leading zeros in numbering the sections, having eliminate
                                                                            % the Chapter 1 supertitle (see below: to eliminate the Chapter 1 supertitle)
 
+
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+\thispagestyle{fancy}
+
+The note introduces in Section \ref{The hayekian version} a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
+
+A counter example is also introduced in Section \ref{The unstructured version}, showing that---with tiny modification---we generate implausible price dynamics.
+
+In the Appendices, we have some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly} simulation project.
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\setcounter{page}{2}
 \tableofcontents
 \thispagestyle{fancy}
 
+
 \listoffigures
 \thispagestyle{fancy}
+\setcounter{page}{2}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,8 +206,9 @@ The IPython (or Python 3.x) code is:
 #                     - the hayekian perspective or
 #                     - the unstructured case
 def warmingUp():
-    global nCycles, nBuyers, nSellers, buyersSellersRatio,\
-    usingBuyersSellersRatio, d0, d1, d2, buyerPriceList, sellerPriceList
+    global nCycles, nBuyers, nSellers,\
+        buyersSellersRatio, sellersBuyersRatio,\
+        usingRatios, d0, d1, d2, buyerPriceList, sellerPriceList
 
     nCycles=10000
     nBuyers= 100
@@ -270,6 +298,10 @@ display(out)
 meanPrice_ts=[]
 meanPriceStDev_ts=[]
 meanPriceVar_ts=[]
+
+if usingRatios:
+    if buyersSellersRatio>1: d2/=sellersBuyersRatio
+    if sellersBuyersRatio>1: d1/=buyersSellersRatio
 
 for t in range(1,nCycles+1):    
     dealPrices=[]
@@ -408,6 +440,10 @@ display(out)
 meanPrice_ts=[]
 meanPriceStDev_ts=[]
 meanPriceVar_ts=[]
+
+if usingRatios:
+    if buyersSellersRatio>1: d2/=sellersBuyersRatio
+    if sellersBuyersRatio>1: d1/=buyersSellersRatio
 
 for t in range(1,nCycles+1):    
     dealPrices=[]
