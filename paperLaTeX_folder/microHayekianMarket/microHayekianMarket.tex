@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[10pt]{report}
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 
@@ -70,7 +70,7 @@
 
 
 
-\title{micro Hayekian Market}
+\title{Micro Simplified Hayekian Market}
 %\subtitle{a}
 \author{Matteo Morini\footnote{University of Torino, Italia} and Pietro Terna\footnote{University of Torino, Italia}}
 
@@ -96,11 +96,13 @@
 \begin{abstract}
 \thispagestyle{fancy}
 
-In Section \ref{The hayekian version} we introduce a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
+We propose here a simplified version of the Hayek's decentralized market hypothesis, considering elementary processes of price adaptation in exchanges.
+
+Sections \ref{The technical setup} and \ref{The structure of the model} report the technical setup and the structure of the model. In Section \ref{The hayekian version} we introduce a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
 
 A counter example is also introduced in Section \ref{The unstructured version}, showing that---with tiny modification---we generate implausible price dynamics.
 
-In the Appendices, we have some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly} simulation project.
+In the Appendices, we report some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{Clic to go to \url{https://terna.github.io/oligopoly/}} simulation project.
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,7 +133,7 @@ The purpose of the note is that of introducing a very simple agent-based model o
 
  A counter example is also introduced, showing how---with tiny modifications---we generate implausible/impossible price dynamics.
 
-The code uses the IPython\footnote{\url{https://ipython.org}} language (an interactive layer upon Python\footnote{\url{https://www.python.org}} using the Jupyter\footnote{\url{http://jupyter.org}} infrastructure) and can be dowloaded from \url{https://github.com/terna/microHayekianMarket} via the \emph{Clone or download} button; it is also possible to run it directly on line thanks to the \href{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}{MyBinder project}\footnote{Clic directly.}.
+The code uses the IPython\footnote{\url{https://ipython.org}} language (an interactive layer upon Python\footnote{\url{https://www.python.org}} using the Jupyter\footnote{\url{http://jupyter.org}} infrastructure) and can be dowloaded from \url{https://github.com/terna/microHayekianMarket} via the \emph{Clone or download} button; it is also possible to run it directly on line thanks to the \href{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}{MyBinder project}\footnote{Click to go to \url{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}}.
 
 A suggested reading about Hayek is a quite recent paper of \citeauthor{10.1257/jep.31.3.215} (\citeyear{10.1257/jep.31.3.215}).
 
@@ -140,12 +142,12 @@ Quoting from the introduction:
 Friedrich A. Hayek (1899-1992) is known for his vision of the market economy as an information processing system characterized by spontaneous order, the emergence of coherence through the independent actions of large numbers of individuals each with limited and local knowledge, coordinated by prices that arise from decentralized processes of competition.
 \end{quotation}
 
-A simplified version @@@
+A simplified version---proposed here---is that of considering decentralized elementary processes of price adaptation in exchanges, with surprising results.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The technical setup}\label{The technical setup}\index{technical setup}
 
-The IPython (or Python 3.x) code requires the following starting setup:
+The IPython (or Python 3.x) code requires the following setup to start:
 
 \begin{lstlisting}[language=Python, caption=Setup of the program, basicstyle=\ttfamily\footnotesize]
 %pylab inline
@@ -169,9 +171,9 @@ Our agents are simply prices, to be interpreted as reservation prices.\footnote{
 
 We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but  we can use them also as agents.
 
-Both in the hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run the \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
+Both in the simplified hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run a \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
 
-In this phase, we define:
+With the \emph{warming up} phase, we define:
 
 \begin{itemize}
 \item $d_0$ - the lower bound of the random uniform numbers, both for the buyers and the sellers, in the warming up phase; 
@@ -187,22 +189,22 @@ in the running phase, the lower bound is $0$;
 \item the initial seller $j$ reservation price, different for each seller: $p_{s,j}=1 + u_j$ with $u_j\sim\mathcal{U}(d_0,d_2)$;
 \item $buyersSellersRatio$ - the ratio $\frac{nBuyers}{nSellers}$;
 \item $sellersBuyersRatio$ - the ratio $\frac{nSellers}{nBuyers}$;
-\item $usingRatios$ - a logic variable to limit $d_1$ or $d_2$
-\item $squeezeRate$ - always $< 1$ as further compression of $d_1$ or $d_2$
+\item $usingRatios$ - a logic variable activating limitations to $d_1$ or $d_2$
+\item $squeezeRate$ - always $< 1$, as further compression of $d_1$ or $d_2$
 \item $usingSqueezeRate$ - a logic variable to further squeeze $d_1$ or $d_2$
 \end{itemize}
 
-With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$ we obtain two not overlapping price sequences that we can interpret as a demand curve and an offer one (Fig. \ref{output_3_1.png}).
+With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$, we obtain in Fig. \ref{output_3_1.png} two not overlapping price sequences that we can interpret as a demand curve (red) and an offer one (blue).
 
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1.png}}
-\caption{An example of initial not overlapping demand curve and offer curve}
+\caption{An example of initial not overlapping demand curve (red) and offer curve (blue)}
 \label{output_3_1.png}
 \end{center}
 \end{figure}
 
-This is the \emph{warming up}, or starting situation, of the model. To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase. This happens automatically, calling the specific function in the beginning of both the cases.
+To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase. This happens automatically, calling the specific function in the beginning of both the cases.
 
 
 The IPython (or Python 3.x) code is:
@@ -253,16 +255,16 @@ def warmingUp():
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The hayekian version}\label{The hayekian version}\index{hayekian version}
+\section{The simplified hayekian version}\label{The hayekian version}\index{hayekian version}
  
 The buyers and the sellers meet randomly. Buyer $i$ and seller $j$ exchange if  $pL^b_i \geq pL^s_j$; the deal is recorded at the price of the seller $pL^s_j$.\footnote{In the $mall$, sell prices are public.}
 
-In this version, representing the key point in this note, the running prices are changing being multiplied in each cycle by following the correction coefficients:
+In this version, representing the key point in this note, the running prices are multiplied in each cycle by the following  correction coefficients:
 
 \begin{itemize}
 \item for the buyer: (i) $c_b=\frac{1} {1 + u_b}$ if the deal succeeds (trying to pay less next time) or (ii) $c_b=1 + u_b$ if the deal fails (preparing to pay more next time); in (i) and (ii) we have $u_b\sim\mathcal{U}(0,d_1)$
 
-\item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (preparing to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
+\item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (trying to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
 With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_2.png} and \ref{output_3_3.png}).
@@ -286,10 +288,10 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 \end{figure}
 
 \begin{center}
-\fbox{\parbox[c][3.5cm][c]{13cm}{
+\fbox{\parbox[c][3.5cm][c]{11cm}{
 A comment: we have a plausible series of mean prices, with a complicated behavior, and with a high stability of the dispersion of the values within each cycle.
 
-The right side of the buyer and seller curves shows another plausible situation: that of the presence of agents not exchanging. {\color{red}A note for Matteo and Pietro: this is a very important effect for the \emph{Oligopoly} model.}}}
+The right side of the buyer and seller curves shows another plausible situation: that of the presence of agents not exchanging. {\color{red}A note for Matteo and Pietro: this is a very important emergent effect for the \href{https://terna.github.io/oligopoly/}{\emph{Oligopoly}} model.}}}
 \end{center}
 
 \bigskip
@@ -298,7 +300,7 @@ Have a look to the Appendix \ref{Two cases of not balancing numbers of buyers an
 
 The IPython (or Python 3.x) code is:
 
-\begin{lstlisting}[language=Python, caption=The model in the hayekian perspective, basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[language=Python, caption=The model in the simplified hayekian perspective, basicstyle=\ttfamily\footnotesize]
 # hayekian perspective
 
 warmingUp()
@@ -407,7 +409,7 @@ if meanPriceStDev_ts_hist != []:
 
 The buyers and the sellers meet randomly as in Section \ref{The hayekian version}. Buyer $i$ and seller $j$ exchange in any case; the deal is recorded at the mean of the price of the seller $pL^s_j$ and of the price $pL^b_i$ of the buyer.
 
-In this version the running prices are changing being multiplied in each cycle by following the correction coefficients:
+In this version the running prices are  are multiplied in each cycle by the following  correction coefficients:
 
 \begin{itemize}
 
@@ -416,7 +418,7 @@ In this version the running prices are changing being multiplied in each cycle b
 \item  with the same probability for the seller: (iii) $c_s=1 + u_s$ or (iv) $c_s=\frac{1} {1 + u_s}$; in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of mean prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_2.png} and \ref{output_4_3.png}).
+With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of the means of the prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_2.png} and \ref{output_4_3.png}).
 
 \begin{figure}[htbp]
 \begin{center}
@@ -437,7 +439,7 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 \end{figure}
 
 \begin{center}
-\fbox{\parbox[c][2.6cm][c]{13cm}{
+\fbox{\parbox[c][2.6cm][c]{10cm}{
 A comment: this counter-example shows that, missing the \emph{intelligence} in the correction of the prices (implicitly propagating among all the agents), a system of pure random price settings is absolutely far from being plausible.}}
 \end{center}
 
@@ -558,7 +560,7 @@ if meanPriceStDev_ts_hist != []:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \gg nSellers$}
-With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_3_1a.png}), we have two possible path of analysis. 
+With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_3_1a.png}), we have three possible path of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \gg nSellers$, with different rates of per-capita correction}\label{nBuyers > nSellers with different rates of per-capita correction}\index{nBuyers > nSellers with different rates of per-capita correction}
@@ -647,7 +649,7 @@ squeeze
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \ll nSellers$}
-With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_3_1b.png}), we have two possible path of analysis. 
+With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_3_1b.png}), we again have three possible path of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \ll nSellers$, with different rates of per-capita correction}\label{nBuyers < nSellers with different rates of per-capita correction}\index{nBuyers < nSellers with different rates of per-capita correction}
