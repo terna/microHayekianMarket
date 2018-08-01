@@ -569,9 +569,9 @@ If $nBuyers \gg nSellers$, having in each cycle one call---in mean---to a  \emph
 
 As a consequence, the probability that a \emph{seller} decreases her price to meet a \emph{b}uyer is greater than the probability that a \emph{buyer} increases her price to meet a \emph{seller}. 
 
-We can observe that in Figs. \ref{output_3_2a.png} and \ref{output_3_3a.png} the prices are---in the end---lower than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendence has a strong negative slope. We have always $seed=111$.
+We can observe that in Figs. \ref{output_3_2a.png} and \ref{output_3_3a.png} the prices are---in the end---lower than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendency has a strong negative slope. We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-This result is inconsistent with the microeconomic theory, where an excess of demand is supposed to increase the prices.
+This result is inconsistent with the microeconomic theory, where we could expect that an excess of demand will generate the rise of the prices.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -598,16 +598,27 @@ This result is inconsistent with the microeconomic theory, where an excess of de
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers > nSellerswith unequal rates of per-capita correction, with equivalent effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}
+\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}
 
-Still with $nBuyers \gg nSellers$, always having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
+Always with $nBuyers \gg nSellers$, always having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
-In this second version of the experiment, the correction is that @@@
-with unequal rates of per-capita correction, with equivalent effects
+In this second version of the case $nBuyers \gg nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-Always Fig. \ref{output_3_1a.png}, and Fig.s \ref{output_3_2aa.png}, \ref{output_3_3aa.png}
+The novelty is that having $usingRatios=True$ we are activating limitations to $d_1$ or $d_2$.
 
-AGGIUSTARE if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportionally to/with n/N) because in this way they can cherry-pick the best buyers and avoid to contribute to the fall of the prices
+The limitations work as follow:
+\begin{itemize}
+
+\item if the $\frac{nBuyers}{nSellers}>1$ (our case in this example), $d_2$, i.e. the upper limit of the rate of correction of the price of the sellers, is multiplied by $\frac{nSellers}{nBuyers}$;\footnote{An example to clarify: in this Section we have $nBuyers=100$ and $nSellers=50$, so $\frac{nBuyers}{nSellers} \equiv 2$ and $\frac{nSellers}{nBuyers} \equiv 0.5$; $d_2$ is reduced of the 50\%.}
+
+\item if the $\frac{nSellers}{nBuyers}>1$, $d_1$, i.e. the upper limit of the rate of correction of the price of the buyers, is multiplied by $\frac{nBuyers}{nSellers}$.
+
+\end{itemize}
+
+We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportional to $\frac{nSellers}{nBuyers}$) because in this way they can cherry-pick the best buyers (those with the higher reservation price), in this way avoiding to contribute to the fall of the prices.
+
+Always with Fig. \ref{output_3_1a.png} as starting configuration of the prices, Fig.s \ref{output_3_2aa.png} and \ref{output_3_3aa.png} @@@
+
 
 \begin{figure}[htbp]
 \begin{center}
@@ -626,9 +637,10 @@ AGGIUSTARE if the number of sellers is smaller than the number of buyers, the se
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers > nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}
+\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
 squeeze
+We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -658,9 +670,9 @@ If $nBuyers \ll nSellers$, having in each cycle one call---in mean---to a  \emph
 
 As a consequence, the probability that a \emph{buyer} increases her price to meet a \emph{seller} is greater than the probability that a \emph{seller} decreases her price to meet a \emph{buyer}. 
 
-We can observe that in Figs. \ref{output_3_2b.png} and \ref{output_3_3b.png} the prices are---in the end---greater than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendence has a strong positive slope. We have always $seed=111$.
+We can observe that in Figs. \ref{output_3_2b.png} and \ref{output_3_3b.png} the prices are---in the end---greater than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendence has a strong positive slope. We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-This result is inconsistent with the microeconomic theory, where an excess of offer is supposed to decrease the prices.
+This result is inconsistent with the microeconomic theory, where we could expect that an excess of offer will generate the fall of the prices
 
 
 \begin{figure}[htbp]
@@ -692,11 +704,25 @@ This result is inconsistent with the microeconomic theory, where an excess of of
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}
 
+In this second version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
+
+As in Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, the novelty is that having $usingRatios=True$ we are activating limitations to $d_1$ or $d_2$.
+
+The limitations work as follow:
+\begin{itemize}
+
+\item if the $\frac{nBuyers}{nSellers}>1$, $d_2$, i.e. the upper limit of the rate of correction of the price of the sellers, is multiplied by $\frac{nSellers}{nBuyers}$;
+
+\item if the $\frac{nSellers}{nBuyers}>1$ (our case in this example), $d_1$, i.e. the upper limit of the rate of correction of the price of the buyers, is multiplied by $\frac{nBuyers}{nSellers}$.\footnote{An example to clarify: in this Section we have $nBuyers=50$ and $nSellers=100$, so $\frac{nSellers}{nBuyers} \equiv 2$ and $\frac{nBuyers}{nSellers} \equiv0.5$; $d_1$ is reduced of the 50\%.}
+
+\end{itemize}
+
 Here we have unequal rates of per-capita correction, with equivalent effects
 
 Always Fig. \ref{output_3_1b.png}, and Fig.s \ref{output_3_2bb.png}, \ref{output_3_3bb.png}
 
 AGGIUSTARE if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportionally to/with n/N) because in this way they can cherry-pick the best buyers and avoid to contribute to the fall of the prices
+We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
 
 \begin{figure}[htbp]
@@ -720,6 +746,7 @@ AGGIUSTARE if the number of sellers is smaller than the number of buyers, the se
 \subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers < nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
 squeeze
+We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
 \begin{figure}[htbp]
 \begin{center}
