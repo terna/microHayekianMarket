@@ -12,7 +12,7 @@
 \pagestyle{fancy}
 \lhead{}
 \rhead{}
-\chead{micro Hayekian Market}
+\chead{Micro Simplified Hayekian Market}
 
 
 \usepackage{geometry}            % See geometry.pdf to learn the layout options. There are lots.
@@ -96,7 +96,7 @@
 \begin{abstract}
 \thispagestyle{fancy}
 
-The note introduces in Section \ref{The hayekian version} a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
+In Section \ref{The hayekian version} we introduce a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
 
 A counter example is also introduced in Section \ref{The unstructured version}, showing that---with tiny modification---we generate implausible price dynamics.
 
@@ -120,7 +120,7 @@ In the Appendices, we have some technical analyses of the cases with unmatching 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter*{Introduction to a micro Hayekian Market}
+\chapter*{Introduction to a Micro Simplified Hayekian Market}
 %The * above is to eliminate the Chapter 1 supertitle
 \label{micro Hayekian Market}\index{introduction to a micro Hayekian Market}
 \thispagestyle{fancy}
@@ -129,12 +129,18 @@ In the Appendices, we have some technical analyses of the cases with unmatching 
 
 The purpose of the note is that of introducing a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
 
- A counter example is also introduced, showing how with tiny modification we generate implausible price dynamics.
+ A counter example is also introduced, showing how---with tiny modifications---we generate implausible/impossible price dynamics.
 
-The code uses the IPython\footnote{\url{https://ipython.org}.} language (interaction with Python\footnote{\url{https://www.python.org}.}) and can be dowloaded from \url{https://github.com/terna/microHayekianMarket} using the \emph{Clone or download} button; it is also possible to run it directly on line at \\\url{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}.
+The code uses the IPython\footnote{\url{https://ipython.org}} language (an interactive layer upon Python\footnote{\url{https://www.python.org}} using the Jupyter\footnote{\url{http://jupyter.org}} infrastructure) and can be dowloaded from \url{https://github.com/terna/microHayekianMarket} via the \emph{Clone or download} button; it is also possible to run it directly on line thanks to the \href{https://mybinder.org/v2/gh/terna/microHayekianMarket/master?filepath=microHayekianMarket.ipynb}{MyBinder project}\footnote{Clic directly.}.
 
 A suggested reading about Hayek is a quite recent paper of \citeauthor{10.1257/jep.31.3.215} (\citeyear{10.1257/jep.31.3.215}).
 
+Quoting from the introduction:
+\begin{quotation}
+Friedrich A. Hayek (1899-1992) is known for his vision of the market economy as an information processing system characterized by spontaneous order, the emergence of coherence through the independent actions of large numbers of individuals each with limited and local knowledge, coordinated by prices that arise from decentralized processes of competition.
+\end{quotation}
+
+A simplified version @@@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The technical setup}\label{The technical setup}\index{technical setup}
@@ -154,7 +160,7 @@ import time
 import math\end{lstlisting}
 
 \verb|%pylab inline| 
-is a \emph{magic} command of Jupyter.\footnote{\url{http://jupyter.org}.}
+is a \emph{magic} command of Jupyter.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The structure of the model and the \emph{warming up} phase}\label{The structure of the model}\index{structure}
@@ -590,12 +596,12 @@ This result is inconsistent with the microeconomic theory, where an excess of de
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but with equal effects}\label{nBuyers > nSellerswith unequal rates of per-capita correction, but with equal effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but with equal effects}
+\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers > nSellerswith unequal rates of per-capita correction, with equivalent effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}
 
 Still with $nBuyers \gg nSellers$, always having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
 In this second version of the experiment, the correction is that @@@
-with unequal rates of per-capita correction, but with equal effects
+with unequal rates of per-capita correction, with equivalent effects
 
 Always Fig. \ref{output_3_1a.png}, and Fig.s \ref{output_3_2aa.png}, \ref{output_3_3aa.png}
 
@@ -604,7 +610,7 @@ AGGIUSTARE if the number of sellers is smaller than the number of buyers, the se
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2aa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2aa.png}
 \end{center}
 \end{figure}
@@ -612,20 +618,20 @@ AGGIUSTARE if the number of sellers is smaller than the number of buyers, the se
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3aa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3aa.png}
 \end{center}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but with forced effects}\label{nBuyers > nSellerswith unequal rates of per-capita correction, but with forced effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but with forced effects}
+\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers > nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
 squeeze
 
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2aaa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2aaa.png}
 \end{center}
 \end{figure}
@@ -633,7 +639,7 @@ squeeze
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3aaa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3aaa.png}
 \end{center}
 \end{figure}
@@ -682,9 +688,9 @@ This result is inconsistent with the microeconomic theory, where an excess of of
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but with equal effects}\label{nBuyers < nSellers with unequal rates of per-capita correction, but with equal effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but with equal effects}
+\subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}
 
-with unequal rates of per-capita correction, but with equal effects
+Here we have unequal rates of per-capita correction, with equivalent effects
 
 Always Fig. \ref{output_3_1b.png}, and Fig.s \ref{output_3_2bb.png}, \ref{output_3_3bb.png}
 
@@ -694,7 +700,7 @@ AGGIUSTARE if the number of sellers is smaller than the number of buyers, the se
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2bb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ with equivalent effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2bb.png}
 \end{center}
 \end{figure}
@@ -702,21 +708,21 @@ AGGIUSTARE if the number of sellers is smaller than the number of buyers, the se
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3bb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3bb.png}
 \end{center}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but with forced effects}\label{nBuyers < nSellerswith unequal rates of per-capita correction, but with forced effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but with forced effects}
+\subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers < nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
 squeeze
 
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2bbb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2bbb.png}
 \end{center}
 \end{figure}
@@ -724,7 +730,7 @@ squeeze
 \begin{figure}[htbp]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3bbb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3bbb.png}
 \end{center}
 \end{figure}
