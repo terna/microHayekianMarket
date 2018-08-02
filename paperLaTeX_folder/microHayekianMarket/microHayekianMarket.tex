@@ -65,6 +65,8 @@
 \usepackage{color}
 \usepackage{listings}
 
+\usepackage{float} % to use [H] in placing figures
+
 
 \makeindex
 
@@ -196,7 +198,7 @@ in the running phase, the lower bound is $0$;
 
 With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $pL^b$ and in increasing order the vector  $pL^s$, we obtain in Fig. \ref{output_3_1.png} two not overlapping price sequences that we can interpret as a demand curve (red) and an offer one (blue).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_1.png}}
 \caption{An example of initial not overlapping demand curve (red) and offer curve (blue)}
@@ -269,20 +271,20 @@ In this version, representing the key point in this note, the running prices are
 
 With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_2.png} and \ref{output_3_3.png}).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_2.png}}
-\caption{Hayekian case: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2.png}
 \end{center}
 \end{figure}
 
 The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standard~deviation_t}{mean_t}$$.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_3_3.png}}
-\caption{Hayekian case: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3.png}
 \end{center}
 \end{figure}
@@ -420,7 +422,7 @@ In this version the running prices are  are multiplied in each cycle by the foll
 
 With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of the means of the prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_2.png} and \ref{output_4_3.png}).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_2.png}}
 \caption{Unstructured case: ((i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
@@ -430,7 +432,7 @@ With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain ex
 
 The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standard~deviation_t}{mean_t}$$.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_3.png}}
 \caption{Unstructured case: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
@@ -567,13 +569,13 @@ With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \
 
 If $nBuyers \gg nSellers$, having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
-As a consequence, the probability that a \emph{seller} decreases her price to meet a \emph{b}uyer is greater than the probability that a \emph{buyer} increases her price to meet a \emph{seller}. 
+As a consequence, the probability that a \emph{seller} decreases her price to meet that of a \emph{b}uyer is greater than the probability that a \emph{buyer} increases her price to meet that of a \emph{seller}. 
 
 We can observe that in Figs. \ref{output_3_2a.png} and \ref{output_3_3a.png} the prices are---in the end---lower than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendency has a strong negative slope. We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
 This result is inconsistent with the microeconomic theory, where we could expect that an excess of demand will generate the rise of the prices.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_1a.png}}
 \caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \gg nSellers$}
@@ -581,18 +583,18 @@ This result is inconsistent with the microeconomic theory, where we could expect
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2a.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2a.png}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3a.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3a.png}
 \end{center}
 \end{figure}
@@ -604,7 +606,7 @@ Always with $nBuyers \gg nSellers$, always having in each cycle one call---in me
 
 In this second version of the case $nBuyers \gg nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-The novelty is that having $usingRatios=True$ we are activating limitations to $d_1$ or $d_2$.
+The novelty is that of having $usingRatios=True$, so we are activating limitations to $d_1$ or $d_2$.
 
 The limitations work as follow:
 \begin{itemize}
@@ -617,21 +619,21 @@ The limitations work as follow:
 
 We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportional to $\frac{nSellers}{nBuyers}$) because in this way they can cherry-pick the best buyers (those with the higher reservation price), in this way avoiding to contribute to the fall of the prices.
 
-Always with Fig. \ref{output_3_1a.png} as starting configuration of the prices, Fig.s \ref{output_3_2aa.png} and \ref{output_3_3aa.png} @@@
+Always with Fig. \ref{output_3_1a.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2aa.png} and \ref{output_3_3aa.png} we see now interesting price oscillations roughly confined between the limits of Fig. \ref{output_3_1a.png}.
 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2aa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2aa.png}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3aa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3aa.png}
 \end{center}
 \end{figure}
@@ -639,21 +641,32 @@ Always with Fig. \ref{output_3_1a.png} as starting configuration of the prices, 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
-squeeze
-We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
+In this third version of the case $nBuyers \gg nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-\begin{figure}[htbp]
+The second novelty, after that of Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, is that of having $usingSqueeze=True$ (also having $usingRatios=True$ as in Section  \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}), so we are activating further limitations to $d_1$ or $d_2$. We also have $squeezeRate=0.3$.
+
+\begin{itemize}
+
+\item if the $\frac{nBuyers}{nSellers}>1$ (our case in this example), $d_2$, i.e. the upper limit of the rate of correction of the price of the sellers, is multiplied by $squeezeRate$;
+
+\item if the $\frac{nSellers}{nBuyers}>1$, $d_1$, i.e. the upper limit of the rate of correction of the price of the buyers, is multiplied by $squeezeRate$;
+\end{itemize}
+
+
+Always with Fig. \ref{output_3_1a.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2aaa.png} and \ref{output_3_3aaa.png} we see a limited price dynamics, very close to the top band of Fig. \ref{output_3_1a.png}.
+
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2aaa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2aaa.png}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3aaa.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3aaa.png}
 \end{center}
 \end{figure}
@@ -668,14 +681,14 @@ With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \
 
 If $nBuyers \ll nSellers$, having in each cycle one call---in mean---to a  \emph{buyer} from each  \emph{seller}, the number of per-capita actions of the \emph{buyers} in each cycle is greater of the number of per-capita actions of the \emph{sellers}.
 
-As a consequence, the probability that a \emph{buyer} increases her price to meet a \emph{seller} is greater than the probability that a \emph{seller} decreases her price to meet a \emph{buyer}. 
+As a consequence, the probability that a \emph{buyer} increases her price to meet that of a \emph{seller} is greater than the probability that a \emph{seller} decreases her price to meet that of a \emph{buyer}. 
 
 We can observe that in Figs. \ref{output_3_2b.png} and \ref{output_3_3b.png} the prices are---in the end---greater than in Figs. \ref{output_3_2.png} and \ref{output_3_3.png} and, must of all, the price tendence has a strong positive slope. We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-This result is inconsistent with the microeconomic theory, where we could expect that an excess of offer will generate the fall of the prices
+This result is inconsistent with the microeconomic theory, where we could expect that an excess of offer will generate the fall of the prices.
 
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_1b.png}}
 \caption{An example of initial not overlapping demand curve and offer curve, case $nBuyers \ll nSellers$}
@@ -683,18 +696,18 @@ This result is inconsistent with the microeconomic theory, where we could expect
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2b.png}}
-\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \ll nSellers$: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2b.png}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3b.png}}
-\caption{Hayekian case, with $nBuyers \ll nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \ll nSellers$: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3b.png}
 \end{center}
 \end{figure}
@@ -706,7 +719,7 @@ This result is inconsistent with the microeconomic theory, where we could expect
 
 In this second version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-As in Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, the novelty is that having $usingRatios=True$ we are activating limitations to $d_1$ or $d_2$.
+As in Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, the novelty is that of having $usingRatios=True$, so we are activating limitations to $d_1$ or $d_2$.
 
 The limitations work as follow:
 \begin{itemize}
@@ -717,26 +730,22 @@ The limitations work as follow:
 
 \end{itemize}
 
-Here we have unequal rates of per-capita correction, with equivalent effects
+We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of buyers is smaller than the number of sellers, the buyers act with a slow pace of price correction (proportional to $\frac{nBuyers}{nSellers}$) because in this way they can cherry-pick the best sellers (those with the lower reservation price), in this way avoiding to contribute to the rise of the prices.
 
-Always Fig. \ref{output_3_1b.png}, and Fig.s \ref{output_3_2bb.png}, \ref{output_3_3bb.png}
+Always with Fig. \ref{output_3_1b.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2bb.png} and \ref{output_3_3bb.png} we see now a compressed price oscillations roughly close to the bottom limits of Fig. \ref{output_3_1b.png}.
 
-AGGIUSTARE if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportionally to/with n/N) because in this way they can cherry-pick the best buyers and avoid to contribute to the fall of the prices
-We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
-
-
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2bb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ with equivalent effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ with equivalent effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2bb.png}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3bb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but with equivalent effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3bb.png}
 \end{center}
 \end{figure}
@@ -745,21 +754,32 @@ We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers < nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
-squeeze
-We always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
+In this third version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-\begin{figure}[htbp]
+The second novelty, after that of Section \ref{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}, is that of having $usingSqueeze=True$ (also having $usingRatios=True$ as in Section  \ref{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}), so we are activating further limitations to $d_1$ or $d_2$. We also have $squeezeRate=0.3$.
+
+\begin{itemize}
+
+\item if the $\frac{nBuyers}{nSellers}>1$, $d_2$, i.e. the upper limit of the rate of correction of the price of the sellers, is multiplied by $squeezeRate$;
+
+\item if the $\frac{nSellers}{nBuyers}>1$ (our case in this example), $d_1$, i.e. the upper limit of the rate of correction of the price of the buyers, is multiplied by $squeezeRate$;
+\end{itemize}
+
+
+Always with Fig. \ref{output_3_1b.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2bbb.png} and \ref{output_3_3bbb.png} we see a limited price dynamics, very close to the bottom band of Fig. \ref{output_3_1b.png}.
+
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_2bbb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_3_2bbb.png}
 \end{center}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.4\textwidth]{output_3_3bbb.png}}
-\caption{Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
+\caption{Simplified Hayekian case, with $nBuyers \gg nSellers$ but squeezing the effects: (i) the distribution of mean prices of each cycle (i.e., tick-by-tick) and (ii) that of their standard deviations within each tick (cycle)}
 \label{output_3_3bbb.png}
 \end{center}
 \end{figure}
