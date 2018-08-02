@@ -98,9 +98,9 @@
 \begin{abstract}
 \thispagestyle{fancy}
 
-We propose here a simplified version of the Hayek's decentralized market hypothesis, considering elementary processes of price adaptation in exchanges.
+We propose a simplified version of the Hayek's decentralized market hypothesis, considering elementary processes of price adaptation in exchanges.
 
-Sections \ref{The technical setup} and \ref{The structure of the model} report the technical setup and the structure of the model. In Section \ref{The hayekian version} we introduce a very simple agent-based model of a market, with emergent (quite interesting)  price dynamics.
+Sections \ref{The technical setup} and \ref{The structure of the model} report the technical setup and the structure of the model. In Section \ref{The hayekian version} we introduce an elementary agent-based model of a market, with emergent (quite interesting)  price dynamics.
 
 A counter example is also introduced in Section \ref{The unstructured version}, showing that---with tiny modification---we generate implausible price dynamics.
 
@@ -126,7 +126,7 @@ In the Appendices, we report some technical analyses of the cases with unmatchin
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter*{Introduction to a Micro Simplified Hayekian Market}
 %The * above is to eliminate the Chapter 1 supertitle
-\label{micro Hayekian Market}\index{introduction to a micro Hayekian Market}
+\label{micro Hayekian Market}\index{introduction to a micro simplified Hayekian Market}
 \thispagestyle{fancy}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Introduction to a micro Hayekian Market}%
 
@@ -562,12 +562,12 @@ if meanPriceStDev_ts_hist != []:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \gg nSellers$}
-With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_3_1a.png}), we have three possible path of analysis. 
+With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_3_1a.png}), we have three possible paths of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \gg nSellers$, with different rates of per-capita correction}\label{nBuyers > nSellers with different rates of per-capita correction}\index{nBuyers > nSellers with different rates of per-capita correction}
 
-If $nBuyers \gg nSellers$, having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
+If $nBuyers \gg nSellers$, we have in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
 As a consequence, the probability that a \emph{seller} decreases her price to meet that of a \emph{b}uyer is greater than the probability that a \emph{buyer} increases her price to meet that of a \emph{seller}. 
 
@@ -602,11 +602,11 @@ This result is inconsistent with the microeconomic theory, where we could expect
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}
 
-Always with $nBuyers \gg nSellers$, always having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
+Again, with $nBuyers \gg nSellers$, and always having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
 In this second version of the case $nBuyers \gg nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-The novelty is that of having $usingRatios=True$, so we are activating limitations to $d_1$ or $d_2$.
+The novelty is that of setting $usingRatios=True$, so we are activating limitations to $d_1$ or $d_2$.
 
 The limitations work as follow:
 \begin{itemize}
@@ -617,9 +617,9 @@ The limitations work as follow:
 
 \end{itemize}
 
-We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportional to $\frac{nSellers}{nBuyers}$) because in this way they can cherry-pick the best buyers (those with the higher reservation price), in this way avoiding to contribute to the fall of the prices.
+We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of sellers is smaller than the number of buyers, the sellers act with a slow pace of price correction (proportional to $\frac{nSellers}{nBuyers}$) because in this way they can cherry-pick the best buyers (those with the higher reservation price). In this way, they avoid to contribute to the fall of the prices.
 
-Always with Fig. \ref{output_3_1a.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2aa.png} and \ref{output_3_3aa.png} we see now interesting price oscillations roughly confined between the limits of Fig. \ref{output_3_1a.png}.
+Always with Fig. \ref{output_3_1a.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2aa.png} and \ref{output_3_3aa.png} we see now interesting price oscillations roughly confined between the limits of Fig. \ref{output_3_1a.png}. 
 
 
 \begin{figure}[H]
@@ -643,7 +643,7 @@ Always with Fig. \ref{output_3_1a.png} as the starting configuration of the pric
 
 In this third version of the case $nBuyers \gg nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-The second novelty, after that of Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, is that of having $usingSqueeze=True$ (also having $usingRatios=True$ as in Section  \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}), so we are activating further limitations to $d_1$ or $d_2$. We also have $squeezeRate=0.3$.
+The second novelty, after that of Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, is that of setting $usingSqueeze=True$ (and setting $usingRatios=True$ as in Section  \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}), so we are activating further limitations to $d_1$ or $d_2$. We also have $squeezeRate=0.3$.
 
 \begin{itemize}
 
@@ -653,7 +653,7 @@ The second novelty, after that of Section \ref{nBuyers > nSellers with unequal r
 \end{itemize}
 
 
-Always with Fig. \ref{output_3_1a.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2aaa.png} and \ref{output_3_3aaa.png} we see a limited price dynamics, very close to the top band of Fig. \ref{output_3_1a.png}.
+Always with Fig. \ref{output_3_1a.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2aaa.png} and \ref{output_3_3aaa.png} we see a limited price dynamics, very close to the top band of Fig. \ref{output_3_1a.png}. This result is perfectly consistent with microeconomic theory.
 
 \begin{figure}[H]
 \begin{center}
@@ -674,12 +674,12 @@ Always with Fig. \ref{output_3_1a.png} as the starting configuration of the pric
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Case $nBuyers \ll nSellers$}
-With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_3_1b.png}), we again have three possible path of analysis. 
+With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_3_1b.png}), we again have three possible paths of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Case $nBuyers \ll nSellers$, with different rates of per-capita correction}\label{nBuyers < nSellers with different rates of per-capita correction}\index{nBuyers < nSellers with different rates of per-capita correction}
 
-If $nBuyers \ll nSellers$, having in each cycle one call---in mean---to a  \emph{buyer} from each  \emph{seller}, the number of per-capita actions of the \emph{buyers} in each cycle is greater of the number of per-capita actions of the \emph{sellers}.
+If $nBuyers \ll nSellers$, we have in each cycle one call---in mean---to a  \emph{buyer} from each  \emph{seller}, the number of per-capita actions of the \emph{buyers} in each cycle is greater of the number of per-capita actions of the \emph{sellers}.
 
 As a consequence, the probability that a \emph{buyer} increases her price to meet that of a \emph{seller} is greater than the probability that a \emph{seller} decreases her price to meet that of a \emph{buyer}. 
 
@@ -719,7 +719,7 @@ This result is inconsistent with the microeconomic theory, where we could expect
 
 In this second version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-As in Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, the novelty is that of having $usingRatios=True$, so we are activating limitations to $d_1$ or $d_2$.
+As in Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}, the novelty is that of setting $usingRatios=True$, so we are activating limitations to $d_1$ or $d_2$.
 
 The limitations work as follow:
 \begin{itemize}
@@ -730,7 +730,7 @@ The limitations work as follow:
 
 \end{itemize}
 
-We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of buyers is smaller than the number of sellers, the buyers act with a slow pace of price correction (proportional to $\frac{nBuyers}{nSellers}$) because in this way they can cherry-pick the best sellers (those with the lower reservation price), in this way avoiding to contribute to the rise of the prices.
+We have now unequal rates of per-capita correction, with equivalent effects. The interpretation is that if the number of buyers is smaller than the number of sellers, the buyers act with a slow pace of price correction (proportional to $\frac{nBuyers}{nSellers}$) because in this way they can cherry-pick the best sellers (those with the lower reservation price). In this way, they avoid to contribute to the rise of the prices.
 
 Always with Fig. \ref{output_3_1b.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2bb.png} and \ref{output_3_3bb.png} we see now a compressed price oscillations roughly close to the bottom limits of Fig. \ref{output_3_1b.png}.
 
@@ -756,7 +756,7 @@ Always with Fig. \ref{output_3_1b.png} as the starting configuration of the pric
 
 In this third version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
-The second novelty, after that of Section \ref{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}, is that of having $usingSqueeze=True$ (also having $usingRatios=True$ as in Section  \ref{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}), so we are activating further limitations to $d_1$ or $d_2$. We also have $squeezeRate=0.3$.
+The second novelty, after that of Section \ref{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}, is that of setting $usingSqueeze=True$ (and setting $usingRatios=True$ as in Section  \ref{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}), so we are activating further limitations to $d_1$ or $d_2$. We also have $squeezeRate=0.3$.
 
 \begin{itemize}
 
@@ -766,7 +766,7 @@ The second novelty, after that of Section \ref{nBuyers < nSellers with unequal r
 \end{itemize}
 
 
-Always with Fig. \ref{output_3_1b.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2bbb.png} and \ref{output_3_3bbb.png} we see a limited price dynamics, very close to the bottom band of Fig. \ref{output_3_1b.png}.
+Always with Fig. \ref{output_3_1b.png} as the starting configuration of the prices, in Fig.s \ref{output_3_2bbb.png} and \ref{output_3_3bbb.png} we see a limited price dynamics, very close to the bottom band of Fig. \ref{output_3_1b.png}. This result is perfectly consistent with microeconomic theory.
 
 \begin{figure}[H]
 \begin{center}
