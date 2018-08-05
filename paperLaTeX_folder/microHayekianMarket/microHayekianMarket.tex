@@ -104,7 +104,9 @@ Sections \ref{The technical setup} and \ref{The structure of the model} report t
 
 A counter example is also introduced in Section \ref{The unstructured version}, showing that---with tiny modification---we generate implausible price dynamics.
 
-In the Appendices, we report some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{Clic to go to \url{https://terna.github.io/oligopoly/}} simulation project.
+In Appendix \ref{Two triple cases of not balancing numbers of buyers and sellers} we report some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{Clic to go to \url{https://terna.github.io/oligopoly/}} simulation project.
+
+Appendix \ref{Activating idle agents} will be dedicate \ldots
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -551,13 +553,17 @@ if meanPriceStDev_ts_hist != []:
     plt.hist(meanPriceStDev_ts_hist,100);
 \end{lstlisting}
 
+
+
+
 \renewcommand{\thesubsection}{\thesection.\alph{subsection}}
 \renewcommand{\thesection}{\thechapter.\arabic{section}}
 
 \begin{appendices}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Two triple cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two cases of not balancing numbers of buyers and sellers}
+\chapter{Two triple cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two triple cases of not balancing numbers of buyers and sellers}
 \thispagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -783,6 +789,13 @@ Always with Fig. \ref{output_3_1b.png} as the starting configuration of the pric
 \label{output_3_3bbb.png}
 \end{center}
 \end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Activating \emph{idle} agents}\index{idle agents}\label{Activating idle agents}
+\thispagestyle{fancy}
+
 
 
 \end{appendices}
