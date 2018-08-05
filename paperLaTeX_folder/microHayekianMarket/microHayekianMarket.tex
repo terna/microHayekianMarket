@@ -65,7 +65,6 @@
 \usepackage{color}
 \usepackage{listings}
 
-\usepackage{float} % to use [H] in placing figures
 
 
 \makeindex
@@ -84,7 +83,8 @@
 \setlength\fboxsep{0pt}
 
 \renewcommand{\thesection}{\arabic{section}} % to avoid leading zeros in numbering the sections, having eliminate
-                                                                           % the Chapter 1 supertitle (see below: to eliminate the Chapter 1 supertitle)
+                                                                           % the Chapter 1 supertitle (see below: to eliminate the Chapter 1 
+                                                                           % supertitle)
 
 
 \begin{document}
@@ -551,21 +551,21 @@ if meanPriceStDev_ts_hist != []:
     plt.hist(meanPriceStDev_ts_hist,100);
 \end{lstlisting}
 
-
-
+\renewcommand{\thesubsection}{\thesection.\alph{subsection}}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
 
 \begin{appendices}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Two triple cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two cases of not balancing numbers of buyers and sellers}
+\chapter{Two triple cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two cases of not balancing numbers of buyers and sellers}
 \thispagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Case $nBuyers \gg nSellers$}
+\section{Case $nBuyers \gg nSellers$}
 With $nBuyers \gg nSellers$ (e.g., $nBuyers=100$ and $nSellers=50$, as in Fig. \ref{output_3_1a.png}), we have three possible paths of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with different rates of per-capita correction}\label{nBuyers > nSellers with different rates of per-capita correction}\index{nBuyers > nSellers with different rates of per-capita correction}
+\subsection{Case $nBuyers \gg nSellers$, with different rates of per-capita correction}\label{nBuyers > nSellers with different rates of per-capita correction}\index{nBuyers > nSellers with different rates of per-capita correction}
 
 If $nBuyers \gg nSellers$, we have in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
@@ -600,7 +600,7 @@ This result is inconsistent with the microeconomic theory, where we could expect
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}
+\subsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, with equivalent effects}
 
 Again, with $nBuyers \gg nSellers$, and always having in each cycle one call---in mean---to a  \emph{seller} from each  \emph{buyer}, the number of per-capita actions of the \emph{sellers} in each cycle is greater of the number of per-capita actions of the \emph{buyers}.
 
@@ -639,7 +639,7 @@ Always with Fig. \ref{output_3_1a.png} as the starting configuration of the pric
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}
+\subsection{Case $nBuyers \gg nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
 In this third version of the case $nBuyers \gg nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
@@ -673,11 +673,11 @@ Always with Fig. \ref{output_3_1a.png} as the starting configuration of the pric
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Case $nBuyers \ll nSellers$}
+\section{Case $nBuyers \ll nSellers$}
 With $nBuyers \ll nSellers$ (e.g., $nBuyers=50$ and $nSellers=100$, as in Fig. \ref{output_3_1b.png}), we again have three possible paths of analysis. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \ll nSellers$, with different rates of per-capita correction}\label{nBuyers < nSellers with different rates of per-capita correction}\index{nBuyers < nSellers with different rates of per-capita correction}
+\subsection{Case $nBuyers \ll nSellers$, with different rates of per-capita correction}\label{nBuyers < nSellers with different rates of per-capita correction}\index{nBuyers < nSellers with different rates of per-capita correction}
 
 If $nBuyers \ll nSellers$, we have in each cycle one call---in mean---to a  \emph{buyer} from each  \emph{seller}, the number of per-capita actions of the \emph{buyers} in each cycle is greater of the number of per-capita actions of the \emph{sellers}.
 
@@ -715,7 +715,7 @@ This result is inconsistent with the microeconomic theory, where we could expect
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}
+\subsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, with equivalent effects}\label{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, with equivalent effects}
 
 In this second version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
@@ -752,7 +752,7 @@ Always with Fig. \ref{output_3_1b.png} as the starting configuration of the pric
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers < nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but squeezing the effects}
+\subsection{Case $nBuyers \ll nSellers$, with unequal rates of per-capita correction, but squeezing the effects}\label{nBuyers < nSellerswith unequal rates of per-capita correction, but squeezing the effects}\index{nBuyers < nSellers with unequal rates of per-capita correction, but squeezing the effects}
 
 In this third version of the case $nBuyers \ll nSellers$, we always have $d_0=0.1$, $d_1=0.2$,  $d_2=0.2$, and $seed=111$.
 
