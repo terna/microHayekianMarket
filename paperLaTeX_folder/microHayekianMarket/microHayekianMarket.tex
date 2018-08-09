@@ -153,7 +153,8 @@ A simplified version---proposed here---is that of considering decentralized elem
 
 The IPython (or Python 3.x) code requires the following setup to start:
 
-\begin{lstlisting}[language=Python, caption=Setup of the program, basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[language=Python, caption=Setup of the program, 
+label={Setup of the program}.basicstyle=\ttfamily\footnotesize]
 %pylab inline
 %pylab inline
 import statistics as s
@@ -213,8 +214,9 @@ To generate new examples related to Section \ref{The hayekian version} and to Se
 
 The IPython (or Python 3.x) code is:
 
-\label{Warming up of the model}
-\begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
+
+\begin{lstlisting}[language=Python, caption=Warming up of the model, 
+label={Warming up of the model},basicstyle=\ttfamily\footnotesize]
 # warming up
 
 # execute before both: 
@@ -305,8 +307,8 @@ Have a look to the Appendix \ref{Two triple cases of not balancing numbers of bu
 
 The IPython (or Python 3.x) code is:
 
-\label{The model in the simplified hayekian perspective}
-\begin{lstlisting}[language=Python, caption=The model in the simplified hayekian perspective, basicstyle=\ttfamily\footnotesize]
+
+\begin{lstlisting}[language=Python, caption=The model in the simplified hayekian perspective, label={The model in the simplified hayekian perspective},basicstyle=\ttfamily\footnotesize]
 # hayekian perspective
 
 warmingUp()
@@ -454,7 +456,8 @@ A comment: this counter-example shows that, missing the \emph{intelligence} in t
 
 The IPython (or Python 3.x) code is:
 
-\begin{lstlisting}[language=Python, caption=The unstructured version, basicstyle=\ttfamily\footnotesize]
+\begin{lstlisting}[language=Python, caption=The unstructured version, 
+label={The unstructured version},basicstyle=\ttfamily\footnotesize]
 # unstructured case
 
 warmingUp()
@@ -820,8 +823,9 @@ In this experiment we have $buyerThreshold=5$,  $sellerThreshold=50$, $d_{1_{ove
 
 As you can see in Listing \ref{Warming up for the corrupted version}, Listing \ref{Warming up of the model} is modified in the following way: now each agent holds a two element vector reporting her reservation price and a counter.
 
-\label{Warming up for the corrupted version}
-\begin{lstlisting}[language=Python, caption=Warming up for the corrupted version of the model, basicstyle=\ttfamily\footnotesize]
+
+\begin{lstlisting}[language=Python, caption=Warming up for the corrupted version of the model, 
+label={Warming up for the corrupted version},basicstyle=\ttfamily\footnotesize]
 # warming up for corrupted version
 
 # execute before the corrupted hayekian version
@@ -872,14 +876,140 @@ def warmingUp():
     ylabel("agents' reservation prices");
 \end{lstlisting}
 
-\label{The model in the corrupted simplified hayekian perspective}
-\begin{lstlisting}[language=Python, caption=The model in the corrupted simplified hayekian perspective, basicstyle=\ttfamily\footnotesize]
-a
+
+Also Listing \ref{The model in the simplified hayekian perspective} is modified, to build Listing \ref{The listing of model in the corrupted simplified hayekian perspective}, where the counter of each agent records the number of consecutive failures in buying or in selling.
+
+In case of success the counter is set again to $0$.
+
+If the counter is \emph{greater than}  one of the thresholds, $buyerThreshold$ or $sellerThreshold$, the buyer of the seller make a special correction of their reservation prices multiplying the buyer price by $c_b=1 + u_b$ (with $u_b\sim\mathcal{U}(0,d_{1_{overT}})$) or the seller price by $c_s=\frac{1} {1 + u_s}$ (with $u_s\sim\mathcal{U}(0,d_{2_{overT}})$).
+
+The idea behind this construction is that of forcing the \emph{idle} agents to operate. The effect is quite disappointing.
+
+Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png}, in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on buyers) still are not operating. Our attempt of \emph{corrupting} the simplified hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph shows that it has been a source of inspiration.
+
+
+
+
+\begin{lstlisting}[language=Python, caption=The model in the corrupted simplified hayekian perspective, 
+label={The listing of model in the corrupted simplified hayekian perspective},basicstyle=\ttfamily\footnotesize]
+# corrupted simplified hayekian perspective
+
+warmingUp()
+
+out = Output()
+display(out)
+
+meanPrice_ts=[]
+meanPriceStDev_ts=[]
+meanPriceVar_ts=[]
+
+if usingRatios and not usingSqueezeRate:
+    if buyersSellersRatio>1: d2*=sellersBuyersRatio
+    if sellersBuyersRatio>1: d1*=buyersSellersRatio
+        
+if usingRatios and usingSqueezeRate:
+    if buyersSellersRatio>1: d2*=sellersBuyersRatio*squeezeRate
+    if sellersBuyersRatio>1: d1*=buyersSellersRatio*squeezeRate
+
+
+for t in range(1,nCycles+1):    
+    dealPrices=[]
+    agNum=max(nBuyers,nSellers)
+    for n in range(agNum):
+
+        i = np.random.randint(0,nBuyers)
+        j = np.random.randint(0,nSellers)
+        
+        if buyerPriceList[i][0]>=sellerPriceList[j][0]:
+            dealPrices.append(sellerPriceList[j][0])
+            buyerPriceList[i][0] *=1/(1+np.random.uniform(0,d1))
+            buyerPriceList[i][1] =0 # success
+            sellerPriceList[j][0]*=1+np.random.uniform(0,d2)
+            sellerPriceList[j][1] =0 # success
+        else:
+            buyerPriceList[i][0] *=1+np.random.uniform(0,d1)
+            buyerPriceList[i][1] +=1 # failure
+            sellerPriceList[j][0]*=1/(1+np.random.uniform(0,d2))
+            sellerPriceList[j][1]+=1 # failure
+            
+        # corrections
+        
+        if buyerPriceList[i][1]  > buyerThreshold:
+            buyerPriceList[i][0] *=1+np.random.uniform(0,d1overT)
+            buyerPriceList[i][1] =0
+        if sellerPriceList[j][1] > sellerThreshold:
+            sellerPriceList[j][0]*=1/(1+np.random.uniform(0,d2overT))
+            sellerPriceList[j][1]=0
+           
+           
+    if len(dealPrices) > 2:
+        meanPrice_ts.append(s.mean(dealPrices))
+        meanPriceVar_ts.append(s.variance(dealPrices))
+        meanPriceStDev_ts.append(s.stdev(dealPrices))
+    else:
+        meanPrice_ts.append(np.nan)
+        meanPriceStDev_ts.append(np.nan)
+        
+    if t % 1000==0:
+        with out:
+            clear_output()
+        with out:
+            print('time', t, 'and n. of exchanges in the last cycle', \
+              len(dealPrices))
+            print(\
+        'mean and var of exchange prices in the last cycle: %1.3e, %1.3e' %\
+              (meanPrice_ts[-1],meanPriceVar_ts[-1]))
+
+        fig1=plt.figure(1,figsize=(7,15),clear=True)
+
+        plt.subplot(311)
+        plt.plot(list(zip(*sorted(buyerPriceList, reverse=True)))[0],"r")
+        plt.plot(list(zip(*sorted(sellerPriceList)))[0],"b")
+        plt.title(\
+            "buyers' prices (red) and sellers' prices (blue)")
+        xlabel("the agents")
+        ylabel("agents' reservation prices")
+
+        plt.subplot(312)
+        plt.title("mean price of each cycle")
+        xlabel("t")
+        ylabel("mean price of each cycle")
+        plt.plot(meanPrice_ts,"g")
+        
+        plt.subplot(313)
+        plt.title("price coef. of variation within each cycle")
+        coefOfVariation=[]
+        for m in range(len(meanPriceStDev_ts)):
+            coefOfVariation.append(meanPriceStDev_ts[m]/
+                                   meanPrice_ts[m])
+        plt.plot(coefOfVariation,".",markersize=0.1)
+        xlabel("t")
+        ylabel("price coef. of variation within each cycle")
+        #plt.show() #activate to see intermadiate plots
+        #time.sleep(1)
+        
+# hist crashes with NaN
+meanPrice_ts_hist=[]
+for k in range(len(meanPrice_ts)): 
+    if not math.isnan(meanPrice_ts[k]):
+        meanPrice_ts_hist.append(meanPrice_ts[k])
+meanPriceStDev_ts_hist=[]
+for k in range(len(meanPriceStDev_ts)): 
+    if not math.isnan(meanPriceStDev_ts[k]):
+        meanPriceStDev_ts_hist.append(meanPriceStDev_ts[k])
+fig2=plt.figure(2,figsize=(7,9))
+plt.subplot(211)
+if meanPrice_ts_hist != []:
+    plt.title("mean price histogram")
+    plt.hist(meanPrice_ts_hist,100,color="g");
+plt.subplot(212)
+if meanPriceStDev_ts_hist != []:
+    plt.title("price standard deviation (within each cycle) histogram")
+    plt.hist(meanPriceStDev_ts_hist,100);
 \end{lstlisting}
 
-Also listing \ref{The model in the simplified hayekian perspective} is modified to build Listing \ref{The model in the corrupted simplified hayekian perspective}, where the counter of each agent records
 
-As starting point we always have the situation of Fig. \ref{output_3_1.png}. In Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png}
+
 
 
 
@@ -899,6 +1029,17 @@ As starting point we always have the situation of Fig. \ref{output_3_1.png}. In 
 \label{output_3_3B1.png}
 \end{center}
 \end{figure}
+
+Observing now the Fig. \ref{output_4_0B1.png}, that we generate with the code of the Listing
+
+\begin{figure}[H]
+\begin{center}
+\fbox{\centering \includegraphics[width=0.7\textwidth]{output_4_0B1.png}}
+\caption{Extending the Simplified Hayekian case: after 10,000 actions we see here a \emph{flash} image of the buyers ordered  following their reservation prices, with the number of recent consecutive unsuccessful buying attempts}
+\label{output_4_0B1.png}
+\end{center}
+\end{figure}
+
 
 
 
@@ -941,7 +1082,7 @@ Must of all, the bar plot in Fig. \ref{output_4_0B2.png} demonstrates that
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Considerations for the developers of the Oligopoly project}
+\section{Final considerations related to the Oligopoly project}
 
 The key point for the developers of the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{\url{https://terna.github.io/oligopoly/}} project are:
 
