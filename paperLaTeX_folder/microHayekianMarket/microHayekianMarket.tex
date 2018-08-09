@@ -106,7 +106,7 @@ A counter example is also introduced in Section \ref{The unstructured version}, 
 
 In Appendix \ref{Two triple cases of not balancing numbers of buyers and sellers} we report some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{Clic to go to \url{https://terna.github.io/oligopoly/}} simulation project.
 
-In Appendix \ref{Activating idle agents} we deepen the problem of the agents that seem to be idle, having the level of their reservation price too low to buy. The Appendix is mainly of interest for the developers of the \href{https://terna.github.io/oligopoly/}{Oligopoly} project.
+In Appendix \ref{Activating idle agents} we deepen the problem of the agents that seem to be idle, having the level of their reservation price too low to buy. The Appendix is mainly of interest to undestand the \href{https://terna.github.io/oligopoly/}{Oligopoly} project.
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -177,7 +177,7 @@ We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ 
 
 Both in the simplified hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run a \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
 
-With the \emph{warming up} phase, we define:
+With the \emph{warming up} phase, we define:\label{parameters}
 
 \begin{itemize}
 \item $d_0$ - the lower bound of the random uniform numbers, both for the buyers and the sellers, in the warming up phase; 
@@ -213,6 +213,7 @@ To generate new examples related to Section \ref{The hayekian version} and to Se
 
 The IPython (or Python 3.x) code is:
 
+\label{Warming up of the model}
 \begin{lstlisting}[language=Python, caption=Warming up of the model, basicstyle=\ttfamily\footnotesize]
 # warming up
 
@@ -295,15 +296,16 @@ The \emph{coefficient of variation} at time $t$ is calculated as: $$\frac{standa
 \fbox{\parbox[c][3.5cm][c]{11cm}{
 A comment: we have a plausible series of mean prices, with a complicated behavior, and with a high stability of the dispersion of the values within each cycle.
 
-The right side of the buyer and seller curves shows another plausible situation: that of the presence of agents not exchanging. {\color{red}A note for Matteo and Pietro: this is a very important emergent effect for the \href{https://terna.github.io/oligopoly/}{\emph{Oligopoly}} model.}}}
+The right side of the buyer and seller curves shows another plausible situation: that of the presence of agents not exchanging. A note: this observation is related to a very important emergent effect for the \href{https://terna.github.io/oligopoly/}{\emph{Oligopoly}} model.}}
 \end{center}
 
 \bigskip
 
-Have a look to the Appendix \ref{Two cases of not balancing numbers of buyers and sellers} for the cases of not balancing number of buyers and sellers.
+Have a look to the Appendix \ref{Two triple cases of not balancing numbers of buyers and sellers} for the cases of not balancing number of buyers and sellers.
 
 The IPython (or Python 3.x) code is:
 
+\label{The model in the simplified hayekian perspective}
 \begin{lstlisting}[language=Python, caption=The model in the simplified hayekian perspective, basicstyle=\ttfamily\footnotesize]
 # hayekian perspective
 
@@ -428,7 +430,7 @@ With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain ex
 \begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.6\textwidth]{output_4_2.png}}
-\caption{Unstructured case: ((i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
+\caption{Unstructured case: (i) an example of final demand and offer curves, (ii) the history of mean prices tick-by-tick, (iii) their coefficients of variation within each tick (cycle)}
 \label{output_4_2.png}
 \end{center}
 \end{figure}
@@ -565,7 +567,7 @@ if meanPriceStDev_ts_hist != []:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Two triple cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two triple cases of not balancing numbers of buyers and sellers}
+\chapter{Two triple cases of not balancing numbers of buyers and sellers}\index{not balancing number of buyers and sellers}\label{Two triple cases of not balancing numbers of buyers and sellers}\label{Two triple cases}
 \thispagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -795,17 +797,92 @@ Always with Fig. \ref{output_3_1b.png} as the starting configuration of the pric
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Activating \emph{idle} agents, with a fundamental unexpected by-product}\index{idle agents}\label{Activating idle agents}
+\chapter{Trying to activate the \emph{idle} agents, with a fundamental unexpected by-product}\index{idle agents}\label{Activating idle agents}
 \thispagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Corrupting the simplified hayekian market model to activate the idle agents: an ingenuous quest for the solution}
 
+As the paper shows up to here, in all the runs of the model, looking at the demand and offer curves we can see that the larger part of the agents are not acting: all the sellers with reservation price greater than that of the crossing point of the curves and all the buyers with reservation price lower than that value.
+
+Trying to activate those idle agents, we add two new parameters to the list of p. \pageref{parameters}:
+\index{new parameters in Appendix \ref{Activating idle agents}}
+
+\begin{itemize}
+
+\item $buyerThreshold$ - over this number of failures, a special price correction occurs, multiplying the buyer price by $c_b=1 + u_b$ with $u_b\sim\mathcal{U}(0,d_{1_{overT}})$;
+
+\item $sellerThreshold$ - over this number of failures, a special price correction occurs, multiplying the seller price by $c_s=\frac{1} {1 + u_s}$ with $u_s\sim\mathcal{U}(0,d_{2_{overT}})$.
+
+\end{itemize}
+
+In this experiment we have $buyerThreshold=5$,  $sellerThreshold=50$, $d_{1_{overT}}=0.4$, $d_{2_{overT}}=0.4$, and $seed=111$. We have $nBuyers=nSellers=100$, so none of the corrections of Appendix \ref{Two triple cases} are working here.
+
+As you can see in Listing \ref{Warming up for the corrupted version}, Listing \ref{Warming up of the model} is modified in the following way: now each agent holds a two element vector reporting her reservation price and a counter.
+
+\label{Warming up for the corrupted version}
+\begin{lstlisting}[language=Python, caption=Warming up for the corrupted version of the model, basicstyle=\ttfamily\footnotesize]
+# warming up for corrupted version
+
+# execute before the corrupted hayekian version
+def warmingUp():
+    global nCycles, nBuyers, nSellers,\
+        buyersSellersRatio, sellersBuyersRatio,\
+        usingRatios, usingSqueezeRate, squeezeRate,\
+        d0, d1, d2, buyerPriceList, sellerPriceList,\
+        sellerThreshold, buyerThreshold,\
+        d1overT, d2overT, fig0
+
+    nCycles=10000
+    nBuyers= 100
+    nSellers=100
+
+    buyersSellersRatio=nBuyers/nSellers
+    sellersBuyersRatio=nSellers/nBuyers
+    usingRatios=True
+    squeezeRate=0.3 # always < 1 
+    usingSqueezeRate=False
+
+    seed=111
+    np.random.seed(seed)
+
+    d0=0.1
+    d1=0.2
+    d2=0.2
+    
+    d1overT=0.4
+    d2overT=0.4
+
+    sellerThreshold=50
+    buyerThreshold =5
+
+    buyerPriceList=[]
+    sellerPriceList=[]
+
+    for i in range(nBuyers):
+        buyerPriceList.append([1/(1+np.random.uniform(d0,d1)),0])
+    for j in range(nSellers):
+        sellerPriceList.append([1+np.random.uniform(d0,d2),0])
+    
+    #zip is an iterator and * means iteratable    
+    fig0=plt.figure(0)
+    plt.plot(list(zip(*sorted(buyerPriceList,reverse=True)))[0],"r");
+    plt.plot(list(zip(*sorted(sellerPriceList)))[0],"b");
+    xlabel("the agents");
+    ylabel("agents' reservation prices");
+\end{lstlisting}
+
+\label{The model in the corrupted simplified hayekian perspective}
+\begin{lstlisting}[language=Python, caption=The model in the corrupted simplified hayekian perspective, basicstyle=\ttfamily\footnotesize]
+a
+\end{lstlisting}
+
+Also listing \ref{The model in the simplified hayekian perspective} is modified to build Listing \ref{The model in the corrupted simplified hayekian perspective}, where the counter of each agent records
+
 As starting point we always have the situation of Fig. \ref{output_3_1.png}. In Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png}
 
 
 
-prima presentazione, on nB=nS per cui nessuna correzione base, usa una iper correzione con sogli di non acquisto, l'effetto e' nullo ai nostri fini, ma ...
 
 \begin{figure}[H]
 \begin{center}
@@ -858,7 +935,7 @@ Must of all, the bar plot in Fig. \ref{output_4_0B2.png} demonstrates that
 \begin{figure}[H]
 \begin{center}
 \fbox{\centering \includegraphics[width=0.7\textwidth]{output_4_0B2.png}}
-\caption{Extending the Simplified Hayekian case: XXX)}
+\caption{Extending the Simplified Hayekian case: after 20,000 actions, each buyer (here the buyers are ordered  following their reservation prices) has been successful in concluding a deal only in about 10,000 cases}
 \label{output_4_0B2.png}
 \end{center}
 \end{figure}
