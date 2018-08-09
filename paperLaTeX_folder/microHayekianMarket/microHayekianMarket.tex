@@ -67,6 +67,7 @@
 
 
 
+
 \makeindex
 
 
@@ -106,7 +107,7 @@ A counter example is also introduced in Section \ref{The unstructured version}, 
 
 In Appendix \ref{Two triple cases of not balancing numbers of buyers and sellers} we report some technical analyses of the cases with unmatching numbers of buyers and sellers. These analyses are strongly related the the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{Clic to go to \url{https://terna.github.io/oligopoly/}} simulation project.
 
-In Appendix \ref{Activating idle agents} we deepen the problem of the agents that seem to be idle, having the level of their reservation price too low to buy. The Appendix is mainly of interest to undestand the \href{https://terna.github.io/oligopoly/}{Oligopoly} project.
+In Appendix \ref{Activating idle agents} we deepen the problem of the agents that seem to be idle, having the level of their reservation price too low to buy. The Appendix is mainly of interest to  better understand the price dynamics within the \href{https://terna.github.io/oligopoly/}{Oligopoly} project.
 \end{abstract}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -274,7 +275,7 @@ In this version, representing the key point in this note, the running prices are
 \item for the seller: (iii) $c_s=1 + u_s$ if the deal succeeds (trying to obtain a higher revenue next time) or (iv) $c_s=\frac{1} {1 + u_s}$  if the deal fails (preparing to obtain a lower revenue next time); in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_2.png} and \ref{output_3_3.png}).
+With $seed=111$,  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain sequences of mean prices (mean within each cycle) quite realistic, with a very low variance within each cycle (see Fig. \ref{output_3_2.png} and \ref{output_3_3.png}).
 
 \begin{figure}[H]
 \begin{center}
@@ -427,7 +428,7 @@ In this version the running prices are  are multiplied in each cycle by the foll
 \item  with the same probability for the seller: (iii) $c_s=1 + u_s$ or (iv) $c_s=\frac{1} {1 + u_s}$; in (iii) and (iv) we have $u_s\sim\mathcal{U}(0,d_2)$.
 \end{itemize}
 
-With $seed=111$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of the means of the prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_2.png} and \ref{output_4_3.png}).
+With $seed=111$,  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$ we obtain exploding sequences of the means of the prices (mean in each cycle), and exploding standard deviation within each cycle (see Fig. \ref{output_4_2.png} and \ref{output_4_3.png}).
 
 \begin{figure}[H]
 \begin{center}
@@ -804,7 +805,7 @@ Always with Fig. \ref{output_3_1b.png} as the starting configuration of the pric
 \thispagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Corrupting the simplified hayekian market model to activate the idle agents: an ingenuous quest for the solution}
+\section{Corrupting the simplified hayekian market model to activate the idle agents: an ingenuous quest for the solution}\label{Corrupting the simplified hayekian - base}
 
 In all the runs of the model up to here, looking at the demand and offer curves we can see that the larger part of the agents is not acting: specifically, all the sellers with reservation price greater than that of the crossing point of the curves and all the buyers with reservation price lower than that value.
 
@@ -819,9 +820,9 @@ Trying to activate those idle agents, we add two new parameters to the list of p
 
 \end{itemize}
 
-In this experiment we have $buyerThreshold=5$,  $sellerThreshold=50$, $d_{1_{overT}}=0.4$, $d_{2_{overT}}=0.4$, and $seed=111$. We have $nBuyers=nSellers=100$, so none of the corrections of Appendix \ref{Two triple cases} are working here.
+With $seed=111$,  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ set to $10,000$, we add $buyerThreshold=5$,  $sellerThreshold=50$, $d_{1_{overT}}=0.4$, and $d_{2_{overT}}=0.4$. We also have $nBuyers=nSellers=100$, so none of the corrections of Appendix \ref{Two triple cases} are working here.
 
-As you can see in Listing \ref{Warming up for the corrupted version}, Listing \ref{Warming up of the model} of p.~\pageref{Warming up of the model} is modified in the following way: now each agent holds a two element vector reporting: (i) her reservation price and (ii) a counter.
+As you can see\footnote{At \url{https://github.com/terna/microHayekianMarket} the notebook is now \url{https://github.com/terna/microHayekianMarket/blob/master/microCorruptedHayekianMarket_base.ipynb}.} in Listing \ref{Warming up for the corrupted version}, Listing \ref{Warming up of the model} of p.~\pageref{Warming up of the model} is modified in the following way: now each agent holds a two element vector reporting: (i) her reservation price and (ii) a counter.
 
 
 \begin{lstlisting}[language=Python, caption=Warming up for the corrupted version of the model, 
@@ -883,9 +884,9 @@ In case of success, the counter is set again to $0$.
 
 If the counter is \emph{greater than}  one of the thresholds, $buyerThreshold$ or $sellerThreshold$, the buyer or the seller make a special correction of their reservation prices, multiplying the buyer price by $c_b=1 + u_b$ (with $u_b\sim\mathcal{U}(0,d_{1_{overT}})$) or the seller price by $c_s=\frac{1} {1 + u_s}$ (with $u_s\sim\mathcal{U}(0,d_{2_{overT}})$).
 
-The idea behind this construction is that of forcing the \emph{idle} agents to operate. The effect is quite disappointing.
+The idea behind this construction is that of forcing the \emph{idle} agents to operate, amplifying their price corrections. The effect is quite disappointing.
 
-Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}, in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is quite higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on buyers) still are not operating. Our attempt of \emph{corrupting} the simplified hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph at \pageref{inspiration} shows that it has been a source of inspiration.\index{a source of inspiration}
+Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}, in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is quite higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on the buyers) still are not operating. Our attempt of \emph{corrupting} the simplified hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph at \pageref{inspiration} shows that it has been a source of inspiration.\index{a source of inspiration}
 
 
 
@@ -1030,7 +1031,7 @@ if meanPriceStDev_ts_hist != []:
 \end{center}
 \end{figure}
 
-\label{inspiration}\index{a source of inspiration}Observing now the Fig. \ref{output_4_0B1.png}, that we generate with the code of the Listing \ref{The code to show agents' successful actions}, we discover that 
+\label{inspiration}\index{a source of inspiration}Observing now the Fig. \ref{output_4_0B1.png}, that we generate with the code of the Listing \ref{The code to show agents' successful actions}, we discover that the agent not operating are distributed in the whole range of the possible prices of Figs. \ref{output_3_2B1.png} and \ref{output_3_3B1.png}. Consequence: the idle agents continuously change and, in a given instant of the time, the idle one are not necessarily the same of the previous tick.  
 
 \begin{figure}[H]
 \begin{center}
@@ -1048,7 +1049,7 @@ label={The code to show agents' successful actions},basicstyle=\ttfamily\footnot
 
 fig3=plt.figure(3,figsize=(7,9))
 plt.title("the buyers in order of reservation price "+\
-          "and their unsuccessful buy acctions since the "+\
+          "and their unsuccessful buy actions since the "+\
           "last successful one");
 plt.bar(list(zip(*sorted(buyerPriceList)))[0],\
          list(zip(*sorted(buyerPriceList)))[1],0.001)
@@ -1062,15 +1063,45 @@ ylabel("unsuccessful buy actions");
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A fundamental unexpected by-product: the solution is here, under our eyes}
+\label{Corrupting the simplified hayekian - by-product}
 
-Fixed!!!!
-seconda presentazione con la scoperta che sempre tutti comperano solo circa il 50\% dei casi ...
+Problem fixed! The solution of the quest for the idle agents' enigma was under our eyes. Due to the continuous price corrections, the buy (or sell, but here we focus on the buyers) action are quite uncertain and in the 50\% of the cases they fail. Why 50\%? Have a look the the demand and offer curves on the right of their crossing point.
 
-As starting point we always have the situation of Fig. \ref{output_3_1.png}. In Figs \ref{output_3_2B2.png} and \ref{output_3_3B2.png}
+Let us generate a new case, as a by-product of the disappointing  model run of Section \ref{Corrupting the simplified hayekian - base}.
 
-doppio periodo
+With $seed=111$,  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ now set to $20,000$, we also have $nBuyers=nSellers=100$; so, none of the corrections of Appendix \ref{Two triple cases} are working here. Note that $buyerThreshold$, $sellerThreshold$, $d_{1_{overT}}$, and $d_{2_{overT}}$ are not in use here.
 
-Must of all, the bar plot in Fig. \ref{output_4_0B2.png} demonstrates that
+The code of Listing \ref{Warming up for the corrupted version} is also working here.\footnote{At \url{https://github.com/terna/microHayekianMarket} the notebook is now \url{https://github.com/terna/microHayekianMarket/blob/master/microCorruptedHayekianMarket_by-product.ipynb}.}
+
+In Listing \ref{Changes to the listing of model in the corrupted simplified hayekian perspective} we report the changes to Listing \ref{The listing of model in the corrupted simplified hayekian perspective}: the counters are increased of one unit for each successful case and never set again to $0$. The corrections dedicated to amplify the price movements in Section \ref{Corrupting the simplified hayekian - base}, are now commented with the triple hyphen signs, so not working.
+
+\begin{lstlisting}[language=Python, caption=Changes to the listing of model in the corrupted simplified hayekian perspective, label={Changes to the listing of model in the corrupted simplified hayekian perspective},basicstyle=\ttfamily\footnotesize]
+        if buyerPriceList[i][0]>=sellerPriceList[j][0]:
+            dealPrices.append(sellerPriceList[j][0])
+            buyerPriceList[i][0] *=1/(1+np.random.uniform(0,d1))
+            buyerPriceList[i][1] +=1 #=0 # success
+            sellerPriceList[j][0]*=1+np.random.uniform(0,d2)
+            sellerPriceList[j][1] +=1 #=0 # success
+        else:
+            buyerPriceList[i][0] *=1+np.random.uniform(0,d1)
+            #buyerPriceList[i][1] +=1 # failure
+            sellerPriceList[j][0]*=1/(1+np.random.uniform(0,d2))
+            #sellerPriceList[j][1]+=1 # failure
+            
+        # corrections
+        """
+        if buyerPriceList[i][1]  > buyerThreshold:
+            buyerPriceList[i][0] *=1+np.random.uniform(0,d1overT)
+            buyerPriceList[i][1] =0
+        if sellerPriceList[j][1] > sellerThreshold:
+            sellerPriceList[j][0]*=1/(1+np.random.uniform(0,d2overT))
+            sellerPriceList[j][1]=0
+        """   
+\end{lstlisting}
+
+Effects (having as starting point always the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}: in Figs \ref{output_3_2B2.png} we have in the first half (10,000 cycles) exactly the same result of Fig. \ref{output_3_2.png} of p.~\ref{output_3_2.png} (same \emph{seed} and same scheme) and in the second half (until the final value of 20,000 cycles) a consistent continuation of the same dynamic. Fig.~\ref{output_3_3B2.png}, with its bimodal price distribution and the low values of the standard deviations within each tick, confirms what we saw in Section \ref{The hayekian version}\index{hayekian version}.
+
+Must of all, the bar plot in Fig. \ref{output_4_0B2.png}---generated with the code of Listing \ref{The code to show agents' successful actions in the by product case}---shows that all the agents are effectively very close to succeed in buying in the 50\% of the possible cases. This result is consistent with the plot of the demand and offer curves, with about one half of the agents on the right of the crossing point, remembering  that those agents are never the same.
 
 \begin{figure}[H]
 \begin{center}
@@ -1096,10 +1127,38 @@ Must of all, the bar plot in Fig. \ref{output_4_0B2.png} demonstrates that
 \end{center}
 \end{figure}
 
+\begin{lstlisting}[language=Python, caption=The code to show agents' successful actions in the by-product case, label={The code to show agents' successful actions in the by product case},
+basicstyle=\ttfamily\footnotesize]
+# the buyers in order of reservation price 
+# and their successful buy acctions
+
+fig3=plt.figure(3,figsize=(7,9))
+plt.title("the buyers in order of reservation price "+\
+          "and their successful buy actions");
+plt.bar(list(zip(*sorted(buyerPriceList)))[0],\
+         list(zip(*sorted(buyerPriceList)))[1],0.001)
+xlabel("reservation prices");
+ylabel("successful buy actions");
+plt.ylim(0, nCycles);
+\end{lstlisting}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Final considerations related to the Oligopoly project}
 
-The key point for the developers of the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{\url{https://terna.github.io/oligopoly/}} project are:
+Here we have the key point for the development of the \href{https://terna.github.io/oligopoly/}{Oligopoly}\footnote{\url{https://terna.github.io/oligopoly/}} project.
+
+\begin{enumerate}[label=\Roman*]
+
+\item To control the level of the prices: we can graduate the intervention described in Section \ref{nBuyers > nSellers with unequal rates of per-capita correction, but squeezing the effects}, with the case $nBuyers \gg nSellers$, which is intrinsically related to unequal rates of per-capita correction, squeezing---and graduating---the effects beyond the level of equivalence.
+
+The economic goal is that of controlling the level of the profits of entrepreneurs, raising the prices.
+
+\item To be sure that the consumption level matches the production: we can increase the number of buying attempts---with price correction---in each cycle, as shown in Section \ref{Corrupting the simplified hayekian - by-product} of Appendix \ref{Activating idle agents}.
+
+The economic goal is that of avoiding the systematic tendency toward the recession that we have found until now (end of July, 2018) in the hayekian version of the Oligopoly work.
+
+\end{enumerate}
 
 \end{appendices}
 
