@@ -175,6 +175,8 @@ is a \emph{magic} command of Jupyter.
 
 Our agents are simply prices, to be interpreted as reservation prices.\footnote{The $max$ price a buyer could pay and the $min$ one a seller could accept.}
 
+The agents act over the time that we organize in cycles; within a \emph{cycle}, all the buyers act once, in random order.\index{cycle}
+
 We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but  we can use them also as agents.
 
 Both in the simplified hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run a \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
