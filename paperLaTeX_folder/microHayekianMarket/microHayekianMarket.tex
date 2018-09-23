@@ -6,7 +6,7 @@
 \usepackage{etoolbox}
 \patchcmd{\abstract}{\titlepage}{\titlepage \addcontentsline{toc}{chapter}{Abstract}}{}{}
 
-% to insert a title at the beginning of each page
+% to insertHayekian a title at the beginning of each page
 % http://ctan.mirror.garr.it/mirrors/CTAN/info/italian/fancyhdr/itfancyhdr.pdf
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -101,7 +101,7 @@
 
 We propose a simplified version of the Hayek's decentralized market hypothesis, considering elementary processes of price adaptation in exchanges.
 
-Sections \ref{The technical setup} and \ref{The structure of the model} report the technical setup and the structure of the model. In Section \ref{The hayekian version} we introduce an elementary agent-based model of a market, with emergent (quite interesting)  price dynamics.
+Sections \ref{The technical setup} and \ref{The structure of the model} report the technical setup and the structure of the model. In Section \ref{The Hayekian version} we introduce an elementary agent-based model of a market, with emergent (quite interesting)  price dynamics.
 
 A counter example is also introduced in Section \ref{The unstructured version}, showing that---with tiny modification---we generate implausible price dynamics.
 
@@ -179,7 +179,7 @@ The agents act over the time that we organize in cycles; within a \emph{cycle}, 
 
 We have two price vectors: $pL^b$ with item $pL^b_i$ for the buyers, and $pL^s$ with item $pL^s_j$ for the sellers. The $i^{th}$ or the $j^{th}$ elements of the vectors are prices, but  we can use them also as agents.
 
-Both in the simplified hayekian perspective (Section \ref{The hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run a \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
+Both in the simplified Hayekian perspective (Section \ref{The Hayekian version}) and in the unstructured one (Section \ref{The unstructured version}) we have to pre-run a \emph{warning up} action. This happens automatically, calling the specific function in the beginning of both the cases.
 
 With the \emph{warming up} phase, we define:\label{parameters}
 
@@ -212,7 +212,7 @@ With  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$, sorting in decreasing order the vector  $
 \end{center}
 \end{figure}
 
-To generate new examples related to Section \ref{The hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase. This happens automatically, calling the specific function in the beginning of both the cases.
+To generate new examples related to Section \ref{The Hayekian version} and to Section \ref{The unstructured version}, it is necessary to repeat this phase. This happens automatically, calling the specific function in the beginning of both the cases.
 
 
 The IPython (or Python 3.x) code is:
@@ -223,7 +223,7 @@ label={Warming up of the model},basicstyle=\ttfamily\footnotesize]
 # warming up
 
 # execute before both: 
-#                     - the hayekian perspective or
+#                     - the Hayekian perspective or
 #                     - the unstructured case
 def warmingUp():
     global nCycles, nBuyers, nSellers,\
@@ -265,7 +265,7 @@ def warmingUp():
 \end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{The simplified hayekian version}\label{The hayekian version}\index{hayekian version}
+\section{The simplified Hayekian version}\label{The Hayekian version}\index{Hayekian version}
  
 The buyers and the sellers meet randomly. Buyer $i$ and seller $j$ exchange if  $pL^b_i \geq pL^s_j$; the deal is recorded at the price of the seller $pL^s_j$.\footnote{In the $mall$, sell prices are public.}
 
@@ -311,8 +311,8 @@ Have a look to the Appendix \ref{Two triple cases of not balancing numbers of bu
 The IPython (or Python 3.x) code is:
 
 
-\begin{lstlisting}[language=Python, caption=The model in the simplified hayekian perspective, label={The model in the simplified hayekian perspective},basicstyle=\ttfamily\footnotesize]
-# hayekian perspective
+\begin{lstlisting}[language=Python, caption=The model in the simplified Hayekian perspective, label={The model in the simplified Hayekian perspective},basicstyle=\ttfamily\footnotesize]
+# Hayekian perspective
 
 warmingUp()
 
@@ -419,7 +419,7 @@ if meanPriceStDev_ts_hist != []:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The unstructured version}\label{The unstructured version}\index{unstructured version}
 
-The buyers and the sellers meet randomly as in Section \ref{The hayekian version}. Buyer $i$ and seller $j$ exchange in any case; the deal is recorded at the mean of the price of the seller $pL^s_j$ and of the price $pL^b_i$ of the buyer.
+The buyers and the sellers meet randomly as in Section \ref{The Hayekian version}. Buyer $i$ and seller $j$ exchange in any case; the deal is recorded at the mean of the price of the seller $pL^s_j$ and of the price $pL^b_i$ of the buyer.
 
 In this version the running prices are  are multiplied in each cycle by the following  correction coefficients:
 
@@ -807,7 +807,7 @@ Always with Fig. \ref{output_3_1b.png} as the starting configuration of the pric
 \thispagestyle{fancy}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Corrupting the simplified hayekian market model to activate the idle agents: an ingenuous quest for the solution}\label{Corrupting the simplified hayekian - base}
+\section{Corrupting the simplified Hayekian market model to activate the idle agents: an ingenuous quest for the solution}\label{Corrupting the simplified Hayekian - base}
 
 In all the runs of the model up to here, looking at the demand and offer curves we can see that the larger part of the agents is not acting: specifically, all the sellers with reservation price greater than that of the crossing point of the curves and all the buyers with reservation price lower than that value.
 
@@ -831,7 +831,7 @@ As you can see\footnote{At \url{https://github.com/terna/microHayekianMarket} th
 label={Warming up for the corrupted version},basicstyle=\ttfamily\footnotesize]
 # warming up for corrupted version
 
-# execute before the corrupted hayekian version
+# execute before the corrupted Hayekian version
 def warmingUp():
     global nCycles, nBuyers, nSellers,\
         buyersSellersRatio, sellersBuyersRatio,\
@@ -880,7 +880,7 @@ def warmingUp():
 \end{lstlisting}
 
 
-Also Listing \ref{The model in the simplified hayekian perspective} of p.~\pageref{The model in the simplified hayekian perspective} is modified, to build Listing \ref{The listing of model in the corrupted simplified hayekian perspective}, where the counter of each agent records the number of consecutive failures in buying or in selling.
+Also Listing \ref{The model in the simplified Hayekian perspective} of p.~\pageref{The model in the simplified Hayekian perspective} is modified, to build Listing \ref{The listing of model in the corrupted simplified Hayekian perspective}, where the counter of each agent records the number of consecutive failures in buying or in selling.
 
 In case of success, the counter is set again to $0$.
 
@@ -888,14 +888,14 @@ If the counter is \emph{greater than}  one of the thresholds, $buyerThreshold$ o
 
 The idea behind this construction is that of forcing the \emph{idle} agents to operate, amplifying their price corrections. The effect is quite disappointing.
 
-Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}, in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is quite higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on the buyers) still are not operating. Our attempt of \emph{corrupting} the simplified hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph at \pageref{inspiration} shows that it has been a source of inspiration.\index{a source of inspiration}
+Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}, in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is quite higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on the buyers) still are not operating. Our attempt of \emph{corrupting} the simplified Hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph at \pageref{inspiration} shows that it has been a source of inspiration.\index{a source of inspiration}
 
 
 
 
-\begin{lstlisting}[language=Python, caption=The model in the corrupted simplified hayekian perspective, 
-label={The listing of model in the corrupted simplified hayekian perspective},basicstyle=\ttfamily\footnotesize]
-# corrupted simplified hayekian perspective
+\begin{lstlisting}[language=Python, caption=The model in the corrupted simplified Hayekian perspective, 
+label={The listing of model in the corrupted simplified Hayekian perspective},basicstyle=\ttfamily\footnotesize]
+# corrupted simplified Hayekian perspective
 
 warmingUp()
 
@@ -1065,11 +1065,11 @@ ylabel("unsuccessful buy actions");
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{A fundamental unexpected by-product: the solution is here, under our eyes}
-\label{Corrupting the simplified hayekian - by-product}
+\label{Corrupting the simplified Hayekian - by-product}
 
 Problem fixed! The solution of the quest for the idle agents' enigma was under our eyes. Due to the continuous price corrections, the buy (or sell, but here we focus on the buyers) action are quite uncertain and in the 50\% of the cases they fail. Why 50\%? Have a look the the demand and offer curves on the right of their crossing point.
 
-Let us generate a new case, as a by-product of the disappointing  model run of Section \ref{Corrupting the simplified hayekian - base}.
+Let us generate a new case, as a by-product of the disappointing  model run of Section \ref{Corrupting the simplified Hayekian - base}.
 
 With $seed=111$,  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ now set to $20,000$, we also have $nBuyers=nSellers=100$; so, none of the corrections of Appendix \ref{Two triple cases} are working here. Note that $buyerThreshold$, $sellerThreshold$, $d_{1_{overT}}$, and $d_{2_{overT}}$ are not in use here.
 
