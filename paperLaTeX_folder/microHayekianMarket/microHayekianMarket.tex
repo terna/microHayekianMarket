@@ -888,7 +888,9 @@ If the counter is \emph{greater than}  one of the thresholds, $buyerThreshold$ o
 
 The idea behind this construction is that of forcing the \emph{idle} agents to operate, amplifying their price corrections. The effect is quite disappointing.
 
-Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}, in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is quite higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on the buyers) still are not operating. Our attempt of \emph{corrupting} the simplified Hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph at \pageref{inspiration} shows that it has been a source of inspiration.\index{a source of inspiration}
+Considering that as a starting point we always have the situation of Fig. \ref{output_3_1.png} of p.~\pageref{output_3_1.png}, 
+
+in Figs \ref{output_3_2B1.png} and \ref{output_3_3B1.png} we simply see that in our case, with $buyerThreshold=5$ and  $sellerThreshold=50$, the price series is quite higher than in Fig. \ref{output_3_2.png} and that a lot of buyers (and sellers too, but here we focus on the buyers) still are not operating. Our attempt of \emph{corrupting} the simplified Hayekian market to force the buyers to buy, has been a complete failure. But \ldots the next paragraph at \pageref{inspiration} shows that it has been a source of inspiration.\index{a source of inspiration}
 
 
 
@@ -1075,7 +1077,8 @@ With $seed=111$,  $d_0=0.1$, $d_1=0.2$, $d_2=0.2$ and $nCycles$ now set to $20,0
 
 The code of Listing \ref{Warming up for the corrupted version} is also working here.\footnote{At \url{https://github.com/terna/microHayekianMarket} the notebook is now \url{https://github.com/terna/microHayekianMarket/blob/master/microCorruptedHayekianMarket_by-product.ipynb}.}
 
-In Listing \ref{Changes to the listing of model in the corrupted simplified hayekian perspective} we report the changes to Listing \ref{The listing of model in the corrupted simplified hayekian perspective}: the counters are increased of one unit for each successful case and never set again to $0$. The corrections dedicated to amplify the price movements in Section \ref{Corrupting the simplified hayekian - base}, are now commented with the triple hyphen signs, so not working.
+In Listing \ref{Changes to the listing of model in the corrupted simplified hayekian perspective} we report the changes to Listing 
+\ref{The listing of model in the corrupted simplified Hayekian perspective}: the counters are increased of one unit for each successful case and never set again to $0$. The corrections dedicated to amplify the price movements in Section \ref{Corrupting the simplified Hayekian - base}, are now commented with the triple hyphen signs, so not working.
 
 \begin{lstlisting}[language=Python, caption=Changes to the listing of model in the corrupted simplified hayekian perspective, label={Changes to the listing of model in the corrupted simplified hayekian perspective},basicstyle=\ttfamily\footnotesize]
         if buyerPriceList[i][0]>=sellerPriceList[j][0]:
